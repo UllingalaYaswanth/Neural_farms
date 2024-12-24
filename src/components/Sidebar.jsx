@@ -21,8 +21,9 @@ function Sidebar() {
       { id: 3, path: '/messages', name: "Soil Health", icon: MdTerrain  },  // Using GiPlantRoots as placeholder
       { id: 4, path: '/projects', name: "Irrigation Control", icon: GiWateringCan },
       { id: 5, path: '/workplan', name: "Weather & Climate", icon: WiDaySunny },
-      { id: 6, path: '/equipment', name: "Farm Equipment", icon: GiFarmTractor },  // Corrected icon
-      { id: 7, path: '/reports', name: "Analytics & Reports", icon: AiOutlineBarChart },
+      { id: 6, path: '/farmequipment', name: "Farm Equipment", icon: GiFarmTractor },  // Corrected icon
+      { id: 7, path: '/analytics', name: "Analytics & Reports", icon: AiOutlineBarChart },
+      
     ]
   return (
     <div className='w-16 md:w-64 fixed left-0 top-0 z-10 h-screen border-r pt-8 px-4 bg-white'>
