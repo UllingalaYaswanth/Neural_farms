@@ -68,6 +68,8 @@ import { AiOutlineBarChart } from 'react-icons/ai';
 import { GiFarmTractor } from 'react-icons/gi';
 import { MdTerrain } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';  // Import useNavigate
+import { FaUsers, FaLeaf, FaMapMarkedAlt, FaChartLine } from "react-icons/fa";
+import { MdAssessment, MdNotifications } from "react-icons/md";
 
 function Sidebar() {
   const [activeLink, setActiveLink] = useState(0);
@@ -84,17 +86,17 @@ function Sidebar() {
   };
 
   const ADMIN_SIDEBAR_LINKS = [
-    { id: 1, path: '/admin', name: 'Home', icon: FaHome },
-    { id: 2, path: '/admin/UserManagement', name: 'Crop Monitoring', icon: GiPlantRoots },
-    { id: 3, path: '/admin/FieldManagement', name: 'Soil Health', icon: MdTerrain },
-    { id: 4, path: '/admin/CropManagement', name: 'Irrigation Control', icon: GiWateringCan },
-    { id: 5, path: '/admin/IrrigationControl', name: 'Weather & Climate', icon: WiDaySunny },
-    { id: 6, path: '/admin/ReportAnalytics', name: 'Farm Equipment', icon: GiFarmTractor },
-    { id: 7, path: '/admin/Notifications', name: 'Analytics & Reports', icon: AiOutlineBarChart },
+    { id: 1, path: '/admin', name: 'Dashboard', icon: FaHome },
+    { id: 2, path: '/admin/UserManagement', name: 'User Management', icon: FaUsers },
+    { id: 3, path: '/admin/FieldManagement', name: 'Field Management', icon: FaMapMarkedAlt },
+    { id: 4, path: '/admin/CropManagement', name: 'Crop Management', icon: FaLeaf },
+    { id: 5, path: '/admin/IrrigationControl', name: 'Irrigation Control', icon: GiWateringCan },
+    { id: 6, path: '/admin/ReportAnalytics', name: 'Report & Analytics', icon: MdAssessment },
+    { id: 7, path: '/admin/Notifications', name: 'Notifications', icon: MdNotifications },
   ];
 
   const USER_SIDEBAR_LINKS = [
-    { id: 1, path: '/user', name: 'Home', icon: FaHome },
+    { id: 1, path: '/user', name: 'Dashboard', icon: FaHome },
     { id: 2, path: '/user/CropMonitoring', name: 'Crop Monitoring', icon: GiPlantRoots },
     { id: 3, path: '/user/SoilHealth', name: 'Soil Health', icon: MdTerrain },
     { id: 4, path: '/user/IrrigationControl', name: 'Irrigation Control', icon: GiWateringCan },
