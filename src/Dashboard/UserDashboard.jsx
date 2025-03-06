@@ -8,6 +8,8 @@ import IrrigationControl from '../userpages/IrrigationControl'
 import WeatherAndClimate from '../userpages/WeatherAndClimate'
 import FarmEquipment from '../userpages/farmEquipment'
 import AnalyticsAndReports from '../userpages/Analytics'
+import FarmerServiceRegistrationForm from '../userpages/Service'
+import Cropseletion from '../userpages/Cropseletion'
 
 function UserDashboard() {
   return (
@@ -21,7 +23,8 @@ function UserDashboard() {
         <Route path='WeatherAndClimate' element={<WeatherAndClimate/>} />
         <Route path='FarmEquipment' element={<FarmEquipment/>} />
         <Route path='AnalyticsAndReports' element={<AnalyticsAndReports/>} />
-        
+        <Route path='Service' element={<FarmerServiceRegistrationForm/>} />
+        <Route path='crop' element={<Cropseletion/>} />
       </Route>
     </Routes>
   )
