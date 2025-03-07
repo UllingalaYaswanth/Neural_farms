@@ -10,6 +10,7 @@ import FarmEquipment from '../userpages/farmEquipment'
 import AnalyticsAndReports from '../userpages/Analytics'
 import FarmerServiceRegistrationForm from '../userpages/Service'
 import Cropseletion from '../userpages/Cropseletion'
+import LandRegistrationForm from '../userpages/LandRegistrartion'
 
 function UserDashboard() {
   return (
@@ -25,6 +26,7 @@ function UserDashboard() {
         <Route path='AnalyticsAndReports' element={<AnalyticsAndReports/>} />
         <Route path='Service' element={<FarmerServiceRegistrationForm/>} />
         <Route path='crop' element={<Cropseletion/>} />
+        <Route path='land' element={<LandRegistrationForm/>} />
       </Route>
     </Routes>
   )

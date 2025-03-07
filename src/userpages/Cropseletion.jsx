@@ -563,7 +563,7 @@ const CropPrediction = () => {
           </div>
            <div>
              <label className="block text-sm font-medium text-gray-700">
-               Estimated Amount
+               Investment Amount
              </label>
              <input
               type="text"
@@ -608,12 +608,6 @@ const CropPrediction = () => {
                     {suggestion.probability}
                   </span>
                 </p>
-                {/* <p className="text-gray-600">
-                  <span className="font-medium">Estimated Cost:</span>{" "}
-                  <span className="text-green-600">
-                    {suggestion.Estimated_cost}
-                  </span>
-                </p> */}
                 <p className="text-gray-600">
                   <span className="font-medium">Profit Margin:</span>{" "}
                   <span className="text-green-600">

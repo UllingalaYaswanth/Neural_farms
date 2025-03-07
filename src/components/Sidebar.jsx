@@ -1,7 +1,7 @@
 // import React, { useState } from 'react'
 // import { LuBox, LuUser, LuMessageSquare, LuCalendar,LuLogOut} from 'react-icons/lu'
 // import {Link} from 'react-router-dom'
-// import logo from '../assets/images/logo.jpeg'
+// import logo from '../assets/images/nf-logo.jpg'
 // import { FaHome } from 'react-icons/fa';
 // import { GiPlantRoots, GiWateringCan } from 'react-icons/gi'; // Use available icons
 // import { WiDaySunny } from 'react-icons/wi';
@@ -60,7 +60,7 @@
 import React, { useState, useEffect } from 'react';
 import { LuLogOut } from 'react-icons/lu';
 import { Link } from 'react-router-dom';
-import logo from '../assets/images/logo.jpeg';
+import logo from '../assets/images/nf-logo.jpg';
 import { FaHome } from 'react-icons/fa';
 import { GiPlantRoots, GiWateringCan } from 'react-icons/gi'; // Use available icons
 import { WiDaySunny } from 'react-icons/wi';
@@ -105,8 +105,9 @@ function Sidebar() {
     { id: 5, path: '/user/WeatherAndClimate', name: 'Weather & Climate', icon: WiDaySunny },
     { id: 6, path: '/user/FarmEquipment', name: 'Farm Equipment', icon: GiFarmTractor },
     { id: 7, path: '/user/AnalyticsAndReports', name: 'Analytics & Reports', icon: AiOutlineBarChart },
-    { id: 7, path: '/user/Service', name: 'Service Request', icon: AiOutlineForm  },
-    { id: 7, path: '/user/crop', name: 'Crop Requirement', icon: AiOutlineForm  },
+    { id: 8, path: '/user/Service', name: 'Service Request', icon: AiOutlineForm  },
+    { id: 9, path: '/user/crop', name: 'Crop Requirement', icon: AiOutlineForm  },
+    { id: 7, path: '/user/land', name: 'Farm Registrartion', icon: AiOutlineForm  },
   ];
 
   const SIDEBAR_LINKS = userRole === 'admin' ? ADMIN_SIDEBAR_LINKS : USER_SIDEBAR_LINKS;
