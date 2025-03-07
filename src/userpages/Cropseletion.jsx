@@ -472,7 +472,7 @@ const CropPrediction = () => {
       {/* Header */}
       <header className="text-center mb-8">
         <h1 className="text-3xl font-bold text-green-800">
-          Crop Prediction Service
+          Crop Recommendation
         </h1>
         <p className="text-gray-600 mt-2">
           Find the best crops for your farm based on weather, soil, and market
