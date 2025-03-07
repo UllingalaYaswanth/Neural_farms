@@ -11,6 +11,7 @@ import AnalyticsAndReports from '../userpages/Analytics'
 import FarmerServiceRegistrationForm from '../userpages/Service'
 import Cropseletion from '../userpages/Cropseletion'
 import LandRegistrationForm from '../userpages/LandRegistrartion'
+import PestDetectionDashboard from '../userpages/Pestcontrol'
 
 function UserDashboard() {
   return (
@@ -27,6 +28,7 @@ function UserDashboard() {
         <Route path='Service' element={<FarmerServiceRegistrationForm/>} />
         <Route path='crop' element={<Cropseletion/>} />
         <Route path='land' element={<LandRegistrationForm/>} />
+        <Route path='pest' element={<PestDetectionDashboard/>} />
       </Route>
     </Routes>
   )

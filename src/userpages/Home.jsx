@@ -531,7 +531,12 @@ const Dashboard = () => {
       name: "Farm 1",
       cropYieldData: [400, 420, 460, 480, 500, 520],
       irrigationEfficiencyData: [80, 85, 90, 92, 94, 95],
-      soilMoistureData: { level: "75%", lastChecked: "2024-12-20" },
+      soilHealthData: {
+        ph: 6.5,
+        texture: "Loamy",
+        organicMatter: "High",
+        healthCondition: "Optimal",
+      },
       cropHealthData: { health: "80%", condition: "Good" },
       irrigationData: { status: "Active", nextWatering: "2024-12-02, 6:00 AM" },
       pestData: { status: "None", lastChecked: "2024-12-20" },
@@ -547,7 +552,12 @@ const Dashboard = () => {
       name: "Farm 2",
       cropYieldData: [380, 410, 450, 470, 490, 510],
       irrigationEfficiencyData: [75, 80, 85, 88, 90, 92],
-      soilMoistureData: { level: "70%", lastChecked: "2024-12-19" },
+      soilHealthData: {
+        ph: 5.9,
+        texture: "Sandy",
+        organicMatter: "Medium",
+        healthCondition: "Needs Improvement",
+      },
       cropHealthData: { health: "75%", condition: "Fair" },
       irrigationData: { status: "Inactive", nextWatering: "N/A" },
       pestData: { status: "Aphids Detected", lastChecked: "2024-12-18" },
@@ -563,7 +573,12 @@ const Dashboard = () => {
       name: "Farm 3",
       cropYieldData: [420, 440, 480, 500, 520, 540],
       irrigationEfficiencyData: [85, 88, 90, 92, 94, 96],
-      soilMoistureData: { level: "80%", lastChecked: "2024-12-21" },
+      soilHealthData: {
+        ph: 7.2,
+        texture: "Clayey",
+        organicMatter: "Low",
+        healthCondition: "Needs Improvement",
+      },
       cropHealthData: { health: "85%", condition: "Excellent" },
       irrigationData: { status: "Active", nextWatering: "2024-12-03, 7:00 AM" },
       pestData: { status: "Spider Mites Detected", lastChecked: "2024-12-21" },
@@ -655,14 +670,21 @@ const Dashboard = () => {
 
       {/* Dashboard Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-        <div className="bg-white shadow-lg rounded-lg p-6">
-          <h2 className="text-xl font-semibold mb-2">Soil Moisture</h2>
-          <div className="flex justify-between items-center">
-            <p className="text-lg font-semibold">{selectedFarmData.soilMoistureData.level}</p>
-            <GiEarthAmerica className="text-3xl text-brown-500" />
+      <div className="bg-white shadow-lg rounded-lg p-6 ">
+        <h2 className="text-xl font-semibold mb-2">Soil Health</h2>
+        {/* Additional Soil Health Information */}
+        <div className="mt-4 flex justify-between items-center">
+          <div>
+          {/* <h3 className="text-lg font-semibold">Soil Health</h3> */}
+          <p className="text-sm text-gray-500">Soil pH: {selectedFarmData.soilHealthData.ph}</p>
+          <p className="text-sm text-gray-500">Soil Texture: {selectedFarmData.soilHealthData.texture}</p>
+          <p className="text-sm text-gray-500">Organic Matter: {selectedFarmData.soilHealthData.organicMatter}</p>
+          <p className="text-sm text-gray-500">Health Condition: {selectedFarmData.soilHealthData.healthCondition}</p>
           </div>
-          <p className="text-sm text-gray-500 mt-2">Last Checked: {selectedFarmData.soilMoistureData.lastChecked}</p>
+          <GiEarthAmerica className="text-3xl text-brown-500" />
         </div>
+        
+      </div>
 
         <div className="bg-white shadow-lg rounded-lg p-6">
           <h2 className="text-xl font-semibold mb-2">Crop Health</h2>

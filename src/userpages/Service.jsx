@@ -1545,10 +1545,10 @@ const FarmerDashboard = () => {
   const dummyData = [
     {
       id: 1,
-      name: 'John Doe',
+      name: 'Sai kumar',
       farmName: 'Green Acres',
-      email: 'john@example.com',
-      phone: '1234567890',
+      email: 'sai@example.com',
+      phone: '9321567890',
       cropType: 'Wheat',
       farmArea: '50',
       address: '123 Farm Lane',
@@ -1557,9 +1557,9 @@ const FarmerDashboard = () => {
     },
     {
       id: 2,
-      name: 'Jane Smith',
+      name: 'Rajesh',
       farmName: 'Golden Fields',
-      email: 'jane@example.com',
+      email: 'rajesh@example.com',
       phone: '9876543210',
       cropType: 'Corn',
       farmArea: '100',
@@ -1569,10 +1569,10 @@ const FarmerDashboard = () => {
     },
     {
       id: 3,
-      name: 'Alice Johnson',
+      name: 'Ganesh',
       farmName: 'Sunrise Farms',
-      email: 'alice@example.com',
-      phone: '5555555555',
+      email: 'ganesh@example.com',
+      phone: '8347155565',
       cropType: 'Rice',
       farmArea: '75',
       address: '789 Rice Field',
@@ -1624,7 +1624,7 @@ const FarmerDashboard = () => {
 <div className='flex justify-between items-center mb-4'>
       {/* Filters */}
       <div className="mb-4 flex space-x-4">
-        <select
+        {/* <select
           name="cropType"
           value={filter.cropType}
           onChange={handleFilterChange}
@@ -1634,7 +1634,7 @@ const FarmerDashboard = () => {
           <option value="Wheat">Wheat</option>
           <option value="Corn">Corn</option>
           <option value="Rice">Rice</option>
-        </select>
+        </select> */}
         <select
           name="serviceType"
           value={filter.serviceType}
@@ -1685,20 +1685,20 @@ const FarmerDashboard = () => {
           <thead>
             <tr className="bg-gray-200">
               <th className="border border-gray-300 px-4 py-2">Name</th>
-              <th className="border border-gray-300 px-4 py-2">Farm Name</th>
-              <th className="border border-gray-300 px-4 py-2">Crop Type</th>
-              <th className="border border-gray-300 px-4 py-2">Farm Area</th>
               <th className="border border-gray-300 px-4 py-2">Services</th>
+              <th className="border border-gray-300 px-4 py-2">Mobile Number</th>
+              <th className="border border-gray-300 px-4 py-2">Email Id</th>
+              <th className="border border-gray-300 px-4 py-2">Address</th>
             </tr>
           </thead>
           <tbody>
             {filteredData.map((item) => (
               <tr key={item.id}>
                 <td className="border border-gray-300 px-4 py-2">{item.name}</td>
-                <td className="border border-gray-300 px-4 py-2">{item.farmName}</td>
-                <td className="border border-gray-300 px-4 py-2">{item.cropType}</td>
-                <td className="border border-gray-300 px-4 py-2">{item.farmArea} acres</td>
                 <td className="border border-gray-300 px-4 py-2">{item.serviceTypes.join(', ')}</td>
+                <td className="border border-gray-300 px-4 py-2">{item.phone}</td>
+                <td className="border border-gray-300 px-4 py-2">{item.email} acres</td>
+                <td className="border border-gray-300 px-4 py-2">{item.address}</td>
               </tr>
             ))}
           </tbody>

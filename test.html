@@ -1,0 +1,468 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pest Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 80%;
+            max-width: 600px;
+        }
+        .input-container {
+            border: 2px dashed #4CAF50;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .input-container input {
+            display: none;
+        }
+        .input-container label {
+            padding: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            text-transform: uppercase;
+        }
+        .input-container.drag-drop {
+            cursor: pointer;
+            border-color: #4CAF50;
+            padding: 30px;
+        }
+        .input-container img {
+            max-width: 100%;
+            margin-top: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #response {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-radius: 4px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Pest Detection</h2>
+    <div class="input-container" id="drag-drop-zone" ondrop="handleDrop(event)" ondragover="allowDrop(event)">
+        <input type="file" id="fileInput" onchange="handleFileSelect(event)">
+        <label for="fileInput">Drag & Drop Image or Click to Upload</label>
+        <p>Or</p>
+        <p>Click to select an image from your device</p>
+    </div>
+    <textarea id="prompt" placeholder="Describe the issue or detection"></textarea>
+    <button onclick="submitData()">Submit</button>
+    <div id="response"></div>
+</div>
+
+<script>
+    let uploadedImage = null;
+
+    // Handle file selection
+    function handleFileSelect(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                uploadedImage = e.target.result;
+                displayImage();
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    // Handle drag-and-drop functionality
+    function allowDrop(event) {
+        event.preventDefault();
+    }
+
+    function handleDrop(event) {
+        event.preventDefault();
+        const file = event.dataTransfer.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                uploadedImage = e.target.result;
+                displayImage();
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    // Display image after selection
+    function displayImage() {
+        const dragDropZone = document.getElementById('drag-drop-zone');
+        const imgElement = document.createElement('img');
+        imgElement.src = uploadedImage;
+        dragDropZone.innerHTML = ''; // Clear the upload area
+        dragDropZone.appendChild(imgElement);
+    }
+
+    // Handle submit and send data to backend (assume a POST request to a detection model API)
+    async function submitData() {
+        if (!uploadedImage) {
+            alert('Please upload an image first!');
+            return;
+        }
+        
+        const promptText = document.getElementById('prompt').value;
+        if (!promptText) {
+            alert('Please provide a description or prompt!');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('image', uploadedImage);
+        formData.append('prompt', promptText);
+
+        // Send image and prompt to backend for processing
+        const responseElement = document.getElementById('response');
+        responseElement.style.display = 'none'; // Hide previous response
+        responseElement.textContent = 'Processing...';
+
+        // Assume you have an endpoint that handles the pest detection (update with actual endpoint)
+        const endpoint = 'your-model-endpoint-url'; // Replace with your model endpoint URL
+        try {
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            if (data.success) {
+                responseElement.style.display = 'block';
+                responseElement.textContent = `Detection Result: ${data.result}`;
+            } else {
+                responseElement.style.display = 'block';
+                responseElement.textContent = 'No pests detected.';
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            responseElement.style.display = 'block';
+            responseElement.textContent = 'An error occurred while processing.';
+        }
+    }
+</script>
+
+</body>
+</html> -->
+
+
+<!DOCTYPE html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pest Detection Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px 10px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .upload-section {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .upload-section h2 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .input-container {
+            border: 2px dashed #4CAF50;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .input-container input {
+            display: none;
+        }
+
+        .input-container label {
+            padding: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            text-transform: uppercase;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            resize: none;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .history-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .history-section h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .history-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .history-item {
+            background-color: #f1f1f1;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .history-item p {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        #response {
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #f1f1f1;
+            border-radius: 4px;
+            display: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header Section -->
+<header>
+    <h1>Pest Detection Dashboard</h1>
+    <p>Your crop protection starts here</p>
+</header>
+
+<!-- Main Container -->
+<div class="container">
+
+    <!-- Image Upload and Detection -->
+    <section class="upload-section">
+        <h2>Upload an Image for Pest Detection</h2>
+        <div class="input-container" id="drag-drop-zone" ondrop="handleDrop(event)" ondragover="allowDrop(event)">
+            <input type="file" id="fileInput" onchange="handleFileSelect(event)">
+            <label for="fileInput">Drag & Drop Image or Click to Upload</label>
+        </div>
+        <textarea id="prompt" placeholder="Describe the issue (optional)"></textarea>
+        <button onclick="submitData()">Submit</button>
+
+        <div id="response"></div>
+    </section>
+
+    <!-- History Section -->
+    <section class="history-section">
+        <h3>Previous Detection Results</h3>
+        <ul class="history-list" id="historyList">
+            <!-- Results will be populated here dynamically -->
+        </ul>
+    </section>
+
+</div>
+
+<!-- Footer Section -->
+<footer>
+    <p>&copy; 2025 Pest Detection Service. All rights reserved.</p>
+</footer>
+
+<script>
+    let uploadedImage = null;
+    const historyList = document.getElementById('historyList');
+
+    // Handle file selection
+    function handleFileSelect(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                uploadedImage = e.target.result;
+                displayImage();
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    // Handle drag-and-drop functionality
+    function allowDrop(event) {
+        event.preventDefault();
+    }
+
+    function handleDrop(event) {
+        event.preventDefault();
+        const file = event.dataTransfer.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                uploadedImage = e.target.result;
+                displayImage();
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    // Display image after selection
+    function displayImage() {
+        const dragDropZone = document.getElementById('drag-drop-zone');
+        const imgElement = document.createElement('img');
+        imgElement.src = uploadedImage;
+        imgElement.style.maxWidth = '200px';
+        imgElement.style.marginTop = '20px';
+        dragDropZone.innerHTML = ''; // Clear the upload area
+        dragDropZone.appendChild(imgElement);
+    }
+
+    // Handle submit and send data to backend
+    async function submitData() {
+        if (!uploadedImage) {
+            alert('Please upload an image first!');
+            return;
+        }
+
+        const promptText = document.getElementById('prompt').value;
+        if (!promptText) {
+            alert('Please provide a description or prompt!');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('image', uploadedImage);
+        formData.append('prompt', promptText);
+
+        // Assume the backend URL here
+        const endpoint = 'your-model-endpoint-url'; // Replace with your actual endpoint
+        const responseElement = document.getElementById('response');
+        responseElement.style.display = 'none'; // Hide previous response
+        responseElement.textContent = 'Processing...';
+
+        try {
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            if (data.success) {
+                responseElement.style.display = 'block';
+                responseElement.textContent = `Detection Result: ${data.result}`;
+                addToHistory(data.result);
+            } else {
+                responseElement.style.display = 'block';
+                responseElement.textContent = 'No pests detected.';
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            responseElement.style.display = 'block';
+            responseElement.textContent = 'An error occurred while processing.';
+        }
+    }
+
+    // Add result to history
+    function addToHistory(result) {
+        const listItem = document.createElement('li');
+        listItem.classList.add('history-item');
+        const timestamp = new Date().toLocaleString();
+        listItem.innerHTML = `<p>${timestamp}: ${result}</p>`;
+        historyList.appendChild(listItem);
+    }
+</script>
+
+</body>
+</html>

@@ -68,7 +68,7 @@ import { AiOutlineBarChart } from 'react-icons/ai';
 import { GiFarmTractor } from 'react-icons/gi';
 import { MdTerrain } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';  // Import useNavigate
-import { FaUsers, FaLeaf, FaMapMarkedAlt, FaChartLine } from "react-icons/fa";
+import { FaUsers, FaLeaf, FaMapMarkedAlt } from "react-icons/fa";
 import { MdAssessment, MdNotifications } from "react-icons/md";
 import { AiOutlineForm } from 'react-icons/ai';
 
@@ -102,12 +102,14 @@ function Sidebar() {
     { id: 2, path: '/user/CropMonitoring', name: 'Crop Monitoring', icon: GiPlantRoots },
     { id: 3, path: '/user/SoilHealth', name: 'Soil Health', icon: MdTerrain },
     { id: 4, path: '/user/IrrigationControl', name: 'Irrigation Control', icon: GiWateringCan },
-    { id: 5, path: '/user/WeatherAndClimate', name: 'Weather & Climate', icon: WiDaySunny },
+    { id: 10 , path: '/user/pest', name: 'Pest Control', icon: GiWateringCan },
+    // { id: 5, path: '/user/WeatherAndClimate', name: 'Weather & Climate', icon: WiDaySunny },
     { id: 6, path: '/user/FarmEquipment', name: 'Farm Equipment', icon: GiFarmTractor },
+    { id: 9, path: '/user/crop', name: 'Crop Requirement', icon: AiOutlineForm  },
     { id: 7, path: '/user/AnalyticsAndReports', name: 'Analytics & Reports', icon: AiOutlineBarChart },
     { id: 8, path: '/user/Service', name: 'Service Request', icon: AiOutlineForm  },
-    { id: 9, path: '/user/crop', name: 'Crop Requirement', icon: AiOutlineForm  },
-    { id: 7, path: '/user/land', name: 'Farm Registrartion', icon: AiOutlineForm  },
+    // { id: 7, path: '/user/land', name: 'Farm Registrartion', icon: AiOutlineForm  },
+  
   ];
 
   const SIDEBAR_LINKS = userRole === 'admin' ? ADMIN_SIDEBAR_LINKS : USER_SIDEBAR_LINKS;
