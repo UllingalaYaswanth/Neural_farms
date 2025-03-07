@@ -105,7 +105,7 @@ function Sidebar() {
     { id: 10 , path: '/user/pest', name: 'Pest Control', icon: GiWateringCan },
     // { id: 5, path: '/user/WeatherAndClimate', name: 'Weather & Climate', icon: WiDaySunny },
     { id: 6, path: '/user/FarmEquipment', name: 'Farm Equipment', icon: GiFarmTractor },
-    { id: 9, path: '/user/crop', name: 'Crop Requirement', icon: AiOutlineForm  },
+    { id: 9, path: '/user/crop', name: 'Crop Recommendation', icon: AiOutlineForm  },
     { id: 7, path: '/user/AnalyticsAndReports', name: 'Analytics & Reports', icon: AiOutlineBarChart },
     { id: 8, path: '/user/Service', name: 'Service Request', icon: AiOutlineForm  },
     // { id: 7, path: '/user/land', name: 'Farm Registrartion', icon: AiOutlineForm  },

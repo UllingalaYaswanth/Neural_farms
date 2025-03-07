@@ -222,7 +222,7 @@ const CropMonitoring = () => {
       pestInfestation: "Moderate",
       pesticideEffect: "Effective",
       leafDamage: "20%",
-      diseasesDetected: ["Powdery mildew", "Root rot"],
+      diseasesDetected: ["Loose Smut", "Black Rust"],
       alerts: ["Pest activity detected", "Watering system requires adjustment"],
     },
     Wheat: {
@@ -425,7 +425,7 @@ const CropMonitoring = () => {
         <div className="bg-white shadow-lg rounded-lg p-6 mb-6">
           <h2 className="text-xl font-semibold mb-4 flex items-center">
             <FaVirus className="mr-2 text-3xl text-red-500" />
-            Diseases Detected
+            Potential Diseases
           </h2>
           <ul className="text-sm text-gray-500">
             {currentCropData.diseasesDetected.map((disease, index) => (
