@@ -965,55 +965,463 @@
 // export default PestDetectionDashboard;
 
 
+// import React, { useState } from "react";
+
+// const PestDetectionDashboard = () => {
+//   const [uploadedImage, setUploadedImage] = useState(null);
+//   const [response, setResponse] = useState("");
+//   const [responseImage, setResponseImage] = useState(null); // To hold the result image
+//   const [prompt, setPrompt] = useState("");
+//   const [serviceProviders, setServiceProviders] = useState([]); // To hold the filtered service providers
+
+//   // Hardcoded service provider data
+//   const allServiceProviders = [
+//     {
+//       name: "Maharashtra Pest Control",
+//       mobile: "+91 98765 43210", // Indian mobile number
+//       service: "Pest Management",
+//       location: "Mumbai, Maharashtra",
+//       email: "contact@maharashtrapestcontrol.com",
+//       pests: ["Aphids", "Caterpillars", "Termites"], // Related pests
+//       apNumber: "022", // Example Area Code (Mumbai)
+//     },
+//     {
+//       name: "EcoGreen Solutions",
+//       mobile: "+91 87654 32109", // Indian mobile number
+//       service: "Eco-friendly Pest Control",
+//       location: "Pune, Maharashtra",
+//       email: "support@ecogreensolutions.com",
+//       pests: ["Aphids", "Spider Mites"],
+//       apNumber: "020", // Example Area Code (Pune)
+//     },
+//     {
+//       name: "GreenSafe Pest Services",
+//       mobile: "+91 76543 21098", // Indian mobile number
+//       service: "Organic Pest Control",
+//       location: "Nashik, Maharashtra",
+//       email: "info@greensafepest.com",
+//       pests: ["Moths", "Aphids", "Leafhoppers"],
+//       apNumber: "0253", // Example Area Code (Nashik)
+//     },
+//     {
+//       name: "SafeGuard Pest Control",
+//       mobile: "+91 65432 10987", // Indian mobile number
+//       service: "Insect and Rodent Control",
+//       location: "Nagpur, Maharashtra",
+//       email: "support@safeguardpest.com",
+//       pests: ["Rodents", "Aphids", "Termites"],
+//       apNumber: "0712", // Example Area Code (Nagpur)
+//     },
+//   ];
+  
+
+//   // Handle file selection
+//   const handleFileSelect = (e) => {
+//     const file = e.target.files[0];
+//     if (file) {
+//       const reader = new FileReader();
+//       reader.onload = function (e) {
+//         setUploadedImage(e.target.result);
+//       };
+//       reader.readAsDataURL(file);
+//     }
+//   };
+
+//   // Handle drag-and-drop functionality
+//   const allowDrop = (e) => {
+//     e.preventDefault();
+//   };
+
+//   const handleDrop = (e) => {
+//     e.preventDefault();
+//     const file = e.dataTransfer.files[0];
+//     if (file) {
+//       const reader = new FileReader();
+//       reader.onload = function (e) {
+//         setUploadedImage(e.target.result);
+//       };
+//       reader.readAsDataURL(file);
+//     }
+//   };
+
+//   // Simulate pest detection and suggest service providers based on the detected pest
+//   const submitData = async () => {
+//     if (!uploadedImage) {
+//       alert("Please upload an image first!");
+//       return;
+//     }
+
+//     if (!prompt) {
+//       alert("Please provide a description or prompt!");
+//       return;
+//     }
+
+//     // Simulate a dummy backend response
+//     setResponse("Processing...");
+    
+//     // Simulate network delay and response
+//     setTimeout(() => {
+//       const dummyResponse = {
+//         success: true,
+//         result: {
+//           description: "Pest detected: Aphids on leaf.",
+//           imageUrl: "https://via.placeholder.com/500x300?text=Detection+Result",
+//           detectedPest: "Aphids", // Detected pest
+//         },
+//       };
+
+//       if (dummyResponse.success) {
+//         setResponse(dummyResponse.result.description); // Set description text from the model
+//         setResponseImage(dummyResponse.result.imageUrl); // Use the dummy image URL
+
+//         // Filter service providers based on detected pest
+//         const filteredProviders = allServiceProviders.filter((provider) =>
+//           provider.pests.includes(dummyResponse.result.detectedPest)
+//         );
+//         setServiceProviders(filteredProviders);
+//       } else {
+//         setResponse("No pests detected.");
+//       }
+//     }, 2000); // Simulating network delay
+//   };
+
+//   return (
+//     <div className="min-h-screen bg-gray-100">
+//       {/* Header */}
+//       <header className="bg-green-500 text-white py-6 text-center">
+//         <h1 className="text-4xl">Pest Detection</h1>
+//         <p>Your crop protection starts here</p>
+//       </header>
+
+//       {/* Main Content */}
+//       <div className="container mx-auto p-6">
+//         {/* Image Upload Section */}
+//         <section className="bg-white p-6 rounded-lg shadow-md mb-8">
+//           <h2 className="text-2xl text-center mb-4">Upload an Image for Pest Detection</h2>
+//           <div
+//             className="border-2 border-dashed border-green-500 p-6 text-center cursor-pointer"
+//             onDrop={handleDrop}
+//             onDragOver={allowDrop}
+//           >
+//             <input
+//               type="file"
+//               id="fileInput"
+//               className="hidden"
+//               onChange={handleFileSelect}
+//             />
+//             <label
+//               htmlFor="fileInput"
+//               className="bg-green-500 text-white py-2 px-6 rounded-md cursor-pointer"
+//             >
+//               Drag & Drop Image or Click to Upload
+//             </label>
+//             {uploadedImage && (
+//               <div className="mt-4">
+//                 <img
+//                   src={uploadedImage}
+//                   alt="Uploaded"
+//                   className="max-w-xs mx-auto"
+//                 />
+//               </div>
+//             )}
+//           </div>
+//           <textarea
+//             value={prompt}
+//             onChange={(e) => setPrompt(e.target.value)}
+//             placeholder="Describe the issue (optional)"
+//             className="w-full p-4 mt-4 border rounded-md"
+//           ></textarea>
+//           <button
+//             onClick={submitData}
+//             className="bg-green-500 text-white py-3 px-6 rounded-md mt-4 hover:bg-green-600"
+//           >
+//             Submit
+//           </button>
+//           {response && (
+//             <div className="mt-4 bg-gray-200 p-4 rounded-md">
+//               <div className="flex">
+//                 {/* Left side: Disease description */}
+//                 <div className="w-1/2 pr-4">
+//                   <p className="font-medium text-lg">{response}</p>
+//                   <p className="mt-2 text-gray-700">
+//                     This pest can cause damage to your crops, affecting leaf health and yield.
+//                     Please take preventive measures.
+//                   </p>
+//                 </div>
+//                 {/* Right side: Uploaded image */}
+//                 <div className="w-1/2 pl-4">
+//                   <img
+//                     src={uploadedImage}
+//                     alt="Uploaded"
+//                     className="max-w-full h-auto rounded-lg"
+//                   />
+//                 </div>
+//               </div>
+//             </div>
+//           )}
+//         </section>
+
+//         {/* Service Providers Section */}
+//         {serviceProviders.length > 0 && (
+//           <section className="bg-white p-6 rounded-lg shadow-md mt-8">
+//             <h3 className="text-2xl mb-4">Service Providers for {response.split(":")[1]}</h3>
+//             <table className="min-w-full bg-white border border-gray-200">
+//               <thead>
+//                 <tr>
+//                   <th className="py-2 px-4 border-b text-left">Name</th>
+//                   <th className="py-2 px-4 border-b text-left">Mobile</th>
+//                   <th className="py-2 px-4 border-b text-left">Service Provided</th>
+//                   <th className="py-2 px-4 border-b text-left">Location</th>
+//                   <th className="py-2 px-4 border-b text-left">Email</th>
+//                 </tr>
+//               </thead>
+//               <tbody>
+//                 {serviceProviders.map((provider, index) => (
+//                   <tr key={index}>
+//                     <td className="py-2 px-4 border-b">{provider.name}</td>
+//                     <td className="py-2 px-4 border-b">{provider.mobile}</td>
+//                     <td className="py-2 px-4 border-b">{provider.service}</td>
+//                     <td className="py-2 px-4 border-b">{provider.location}</td>
+//                     <td className="py-2 px-4 border-b">{provider.email}</td>
+//                   </tr>
+//                 ))}
+//               </tbody>
+//             </table>
+//           </section>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default PestDetectionDashboard;
+
+
+// import React, { useState } from "react";
+
+// const PestDetectionDashboard = () => {
+//   const [uploadedImage, setUploadedImage] = useState(null); // To hold the uploaded image
+//   const [response, setResponse] = useState(""); // To hold the analysis result text
+//   const [responseImage, setResponseImage] = useState(null); // To hold the detected image URL
+//   const [prompt, setPrompt] = useState(""); // To hold the user's symptoms input
+
+//   // Handle file selection
+//   const handleFileSelect = (e) => {
+//     const file = e.target.files[0];
+//     if (file) {
+//       const reader = new FileReader();
+//       reader.onload = function (e) {
+//         setUploadedImage(e.target.result);
+//       };
+//       reader.readAsDataURL(file);
+//     }
+//   };
+
+//   // Handle drag-and-drop functionality
+//   const allowDrop = (e) => {
+//     e.preventDefault();
+//   };
+
+//   const handleDrop = (e) => {
+//     e.preventDefault();
+//     const file = e.dataTransfer.files[0];
+//     if (file) {
+//       const reader = new FileReader();
+//       reader.onload = function (e) {
+//         setUploadedImage(e.target.result);
+//       };
+//       reader.readAsDataURL(file);
+//     }
+//   };
+
+//   // Submit data to the backend API
+//   // const submitData = async () => {
+//   //   if (!uploadedImage) {
+//   //     alert("Please upload an image first!");
+//   //     return;
+//   //   }
+
+//   //   if (!prompt) {
+//   //     alert("Please provide a description or prompt!");
+//   //     return;
+//   //   }
+
+//   //   setResponse("Processing...");
+
+//   //   try {
+//   //     const formData = new FormData();
+//   //     const imageBlob = await fetch(uploadedImage).then((res) => res.blob()); // Convert base64 to Blob
+//   //     formData.append("image", imageBlob, "image.jpg"); // Append the uploaded image
+//   //     formData.append("symptoms", prompt); // Append the prompt
+
+//   //     const response = await fetch("http://localhost:5000/analyze_image/", {
+//   //       method: "POST",
+//   //       body: formData,
+//   //     });
+
+//   //     const data = await response.json();
+
+//   //     if (response.ok) {
+//   //       setResponse(data.analysis_result); // Set the analysis result text
+//   //       setResponseImage(data.detected_image_url); // Set the detected image URL
+//   //     } else {
+//   //       setResponse("An error occurred while processing the request.");
+//   //     }
+//   //   } catch (error) {
+//   //     console.error(error);
+//   //     setResponse("An error occurred while processing the request.");
+//   //   }
+//   // };
+//   const submitData = async () => {
+//     if (!uploadedImage) {
+//       alert("Please upload an image first!");
+//       return;
+//     }
+  
+//     if (!prompt) {
+//       alert("Please provide a description or prompt!");
+//       return;
+//     }
+  
+//     setResponse("Processing...");
+  
+//     try {
+//       const formData = new FormData();
+  
+//       // If the uploaded image is a base64 string, convert it to a Blob
+//       if (typeof uploadedImage === "string" && uploadedImage.startsWith("data:image")) {
+//         const base64Response = await fetch(uploadedImage);
+//         const imageBlob = await base64Response.blob();
+//         formData.append("image", imageBlob, "image.jpg"); // Append image as Blob
+//       } else if (uploadedImage instanceof File) {
+//         // If it's already a file object, append it directly
+//         formData.append("image", uploadedImage);
+//       } else {
+//         alert("Invalid image format.");
+//         return;
+//       }
+  
+//       // Append the symptoms input field with the correct name `symptoms_input`
+//       formData.append("symptoms_input", prompt); // Changed the field name to 'symptoms_input'
+  
+//       const response = await fetch("http://localhost:8000/analyze_image/", {
+//         method: "POST",
+//         body: formData,
+//       });
+  
+//       // Check if the response was successful
+//       if (!response.ok) {
+//         const errorData = await response.json();
+//         console.error("Error from backend:", errorData);
+//         setResponse("An error occurred while processing the request.");
+//         return;
+//       }
+  
+//       // If everything goes well, handle the response data
+//       const data = await response.json();
+  
+//       // Assuming the backend returns analysis_result and detected_image_url
+//       setResponse(data.analysis_result); // Set the analysis result text
+//       setResponseImage(data.detected_image_url); // Set the detected image URL
+//     } catch (error) {
+//       console.error("An error occurred:", error);
+//       setResponse("An error occurred while processing the request.");
+//     }
+//   };
+  
+
+
+//   return (
+//     <div className="min-h-screen bg-gray-100">
+//       {/* Header */}
+//       <header className="bg-green-500 text-white py-6 text-center">
+//         <h1 className="text-4xl">Pest Detection</h1>
+//         <p>Your crop protection starts here</p>
+//       </header>
+
+//       {/* Main Content */}
+//       <div className="container mx-auto p-6">
+//         {/* Image Upload Section */}
+//         <section className="bg-white p-6 rounded-lg shadow-md mb-8">
+//           <h2 className="text-2xl text-center mb-4">Upload an Image for Pest Detection</h2>
+//           <div
+//             className="border-2 border-dashed border-green-500 p-6 text-center cursor-pointer"
+//             onDrop={handleDrop}
+//             onDragOver={allowDrop}
+//           >
+//             <input
+//               type="file"
+//               id="fileInput"
+//               className="hidden"
+//               onChange={handleFileSelect}
+//             />
+//             <label
+//               htmlFor="fileInput"
+//               className="bg-green-500 text-white py-2 px-6 rounded-md cursor-pointer"
+//             >
+//               Drag & Drop Image or Click to Upload
+//             </label>
+//             {uploadedImage && (
+//               <div className="mt-4">
+//                 <img
+//                   src={uploadedImage}
+//                   alt="Uploaded"
+//                   className="max-w-xs mx-auto"
+//                 />
+//               </div>
+//             )}
+//           </div>
+//           <textarea
+//             value={prompt}
+//             onChange={(e) => setPrompt(e.target.value)}
+//             placeholder="Describe the issue"
+//             className="w-full p-4 mt-4 border rounded-md"
+//           ></textarea>
+//           <button
+//             onClick={submitData}
+//             className="bg-green-500 text-white py-3 px-6 rounded-md mt-4 hover:bg-green-600"
+//           >
+//             Submit
+//           </button>
+//           {response && (
+//   <div className="mt-4 bg-gray-200 p-4 rounded-md">
+//     <div className="flex flex-col md:flex-row">
+//       {/* Left side: Analysis result */}
+//       <div className="w-full md:w-1/2 pr-4">
+//         <p className="font-medium text-lg">Detected Issue:</p>
+//         <p className="font-semibold text-gray-600 text-lg">{response}</p>
+//       </div>
+
+//       {/* Right side: Detected image */}
+//       <div className="w-full md:w-1/2 pl-4">
+//         {responseImage && (
+//           <img
+//             src={`http://localhost:8000${responseImage}`} // Display the image from the backend
+//             alt="Detected"
+//             className="max-w-full h-auto rounded-lg"
+//           />
+//         )}
+//       </div>
+//     </div>
+//   </div>
+// )}
+
+//         </section>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default PestDetectionDashboard;
+
 import React, { useState } from "react";
 
 const PestDetectionDashboard = () => {
-  const [uploadedImage, setUploadedImage] = useState(null);
-  const [response, setResponse] = useState("");
-  const [responseImage, setResponseImage] = useState(null); // To hold the result image
-  const [prompt, setPrompt] = useState("");
-  const [serviceProviders, setServiceProviders] = useState([]); // To hold the filtered service providers
-
-  // Hardcoded service provider data
-  const allServiceProviders = [
-    {
-      name: "Maharashtra Pest Control",
-      mobile: "+91 98765 43210", // Indian mobile number
-      service: "Pest Management",
-      location: "Mumbai, Maharashtra",
-      email: "contact@maharashtrapestcontrol.com",
-      pests: ["Aphids", "Caterpillars", "Termites"], // Related pests
-      apNumber: "022", // Example Area Code (Mumbai)
-    },
-    {
-      name: "EcoGreen Solutions",
-      mobile: "+91 87654 32109", // Indian mobile number
-      service: "Eco-friendly Pest Control",
-      location: "Pune, Maharashtra",
-      email: "support@ecogreensolutions.com",
-      pests: ["Aphids", "Spider Mites"],
-      apNumber: "020", // Example Area Code (Pune)
-    },
-    {
-      name: "GreenSafe Pest Services",
-      mobile: "+91 76543 21098", // Indian mobile number
-      service: "Organic Pest Control",
-      location: "Nashik, Maharashtra",
-      email: "info@greensafepest.com",
-      pests: ["Moths", "Aphids", "Leafhoppers"],
-      apNumber: "0253", // Example Area Code (Nashik)
-    },
-    {
-      name: "SafeGuard Pest Control",
-      mobile: "+91 65432 10987", // Indian mobile number
-      service: "Insect and Rodent Control",
-      location: "Nagpur, Maharashtra",
-      email: "support@safeguardpest.com",
-      pests: ["Rodents", "Aphids", "Termites"],
-      apNumber: "0712", // Example Area Code (Nagpur)
-    },
-  ];
-  
+  const [uploadedImage, setUploadedImage] = useState(null); // To hold the uploaded image
+  const [response, setResponse] = useState(null); // To hold the analysis result
+  const [responseImage, setResponseImage] = useState(null); // To hold the detected image URL
+  const [prompt, setPrompt] = useState(""); // To hold the user's symptoms input
+  const [isLoading, setIsLoading] = useState(false); // To handle loading state
 
   // Handle file selection
   const handleFileSelect = (e) => {
@@ -1044,7 +1452,7 @@ const PestDetectionDashboard = () => {
     }
   };
 
-  // Simulate pest detection and suggest service providers based on the detected pest
+  // Submit data to the backend API
   const submitData = async () => {
     if (!uploadedImage) {
       alert("Please upload an image first!");
@@ -1056,33 +1464,59 @@ const PestDetectionDashboard = () => {
       return;
     }
 
-    // Simulate a dummy backend response
-    setResponse("Processing...");
-    
-    // Simulate network delay and response
-    setTimeout(() => {
-      const dummyResponse = {
-        success: true,
-        result: {
-          description: "Pest detected: Aphids on leaf.",
-          imageUrl: "https://via.placeholder.com/500x300?text=Detection+Result",
-          detectedPest: "Aphids", // Detected pest
-        },
-      };
+    setIsLoading(true); // Start loading
+    setResponse(null); // Reset previous response
 
-      if (dummyResponse.success) {
-        setResponse(dummyResponse.result.description); // Set description text from the model
-        setResponseImage(dummyResponse.result.imageUrl); // Use the dummy image URL
+    try {
+      const formData = new FormData();
 
-        // Filter service providers based on detected pest
-        const filteredProviders = allServiceProviders.filter((provider) =>
-          provider.pests.includes(dummyResponse.result.detectedPest)
-        );
-        setServiceProviders(filteredProviders);
+      // If the uploaded image is a base64 string, convert it to a Blob
+      if (typeof uploadedImage === "string" && uploadedImage.startsWith("data:image")) {
+        const base64Response = await fetch(uploadedImage);
+        const imageBlob = await base64Response.blob();
+        formData.append("image", imageBlob, "image.jpg"); // Append image as Blob
+      } else if (uploadedImage instanceof File) {
+        // If it's already a file object, append it directly
+        formData.append("image", uploadedImage);
       } else {
-        setResponse("No pests detected.");
+        alert("Invalid image format.");
+        return;
       }
-    }, 2000); // Simulating network delay
+
+      // Append the symptoms input field with the correct name `symptoms_input`
+      formData.append("symptoms_input", prompt); // Changed the field name to 'symptoms_input'
+
+      const response = await fetch("http://localhost:8000/analyze_image/", {
+        method: "POST",
+        body: formData,
+      });
+
+      // Check if the response was successful
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Error from backend:", errorData);
+        setResponse("An error occurred while processing the request.");
+        return;
+      }
+
+      // If everything goes well, handle the response data
+      const data = await response.json();
+
+      // Update state with parsed data
+      setResponse({
+        analysisResult: data.analysis_result,
+        measuresToTake: data.measures_to_take,
+        whoToTalkTo: data.who_to_talk_to,
+        yoloDetection: data.yolo_detection_results,
+        symptomsProvided: data.symptoms_provided,
+      });
+      setResponseImage(data.detected_image_url); // Set the detected image URL
+    } catch (error) {
+      console.error("An error occurred:", error);
+      setResponse("An error occurred while processing the request.");
+    } finally {
+      setIsLoading(false); // Stop loading
+    }
   };
 
   return (
@@ -1108,6 +1542,7 @@ const PestDetectionDashboard = () => {
               id="fileInput"
               className="hidden"
               onChange={handleFileSelect}
+              accept="image/*" // Ensure only images are accepted
             />
             <label
               htmlFor="fileInput"
@@ -1125,70 +1560,63 @@ const PestDetectionDashboard = () => {
               </div>
             )}
           </div>
+          <div className="flex flex-row gap-5">
           <textarea
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
-            placeholder="Describe the issue (optional)"
-            className="w-full p-4 mt-4 border rounded-md"
+            placeholder="Name of the Crop"
+            className="w-[30%] p-4 mt-4 border rounded-md"
+            rows="4" // Add rows for better textarea sizing
           ></textarea>
+          <textarea
+            // value={prompt}
+            // onChange={(e) => setPrompt(e.target.value)}
+            placeholder="Describe the issue"
+            className="w-full p-4 mt-4 border rounded-md"
+            rows="4" // Add rows for better textarea sizing
+          ></textarea>
+          </div>
           <button
             onClick={submitData}
-            className="bg-green-500 text-white py-3 px-6 rounded-md mt-4 hover:bg-green-600"
+            className="bg-green-500 text-white py-3 px-6 rounded-md mt-4 hover:bg-green-600 disabled:bg-gray-400"
+            disabled={isLoading} // Disable button while loading
           >
-            Submit
+            {isLoading ? "Processing..." : "Submit"}
           </button>
           {response && (
             <div className="mt-4 bg-gray-200 p-4 rounded-md">
-              <div className="flex">
-                {/* Left side: Disease description */}
-                <div className="w-1/2 pr-4">
-                  <p className="font-medium text-lg">{response}</p>
-                  <p className="mt-2 text-gray-700">
-                    This pest can cause damage to your crops, affecting leaf health and yield.
-                    Please take preventive measures.
-                  </p>
+              <div className="flex flex-col md:flex-row">
+                {/* Left side: Analysis result */}
+                <div className="w-full md:w-1/2 pr-4">
+                  <p className="font-medium text-lg">Detected Issue:</p>
+                  <div className="font-semibold text-gray-600 text-lg">
+                    <h3 className="text-xl font-bold">Analysis Result:</h3>
+                    <p>{response.analysisResult}</p>
+                    <h3 className="text-xl font-bold mt-4">Measures to Take:</h3>
+                    <p>{response.measuresToTake}</p>
+                    <h3 className="text-xl font-bold mt-4">Who to Talk To:</h3>
+                    <p>{response.whoToTalkTo}</p>
+                  </div>
                 </div>
-                {/* Right side: Uploaded image */}
-                <div className="w-1/2 pl-4">
-                  <img
-                    src={uploadedImage}
-                    alt="Uploaded"
-                    className="max-w-full h-auto rounded-lg"
-                  />
+
+                {/* Right side: Detected image and YOLO results */}
+                <div className="w-full md:w-1/2 pl-4">
+                  <h3 className="text-xl font-bold">Detection Results:</h3>
+                  <p>{response.yoloDetection}</p>
+                  {responseImage && (
+                    <img
+                      src={`http://localhost:8000${responseImage}`} // Display the image from the backend
+                      alt="Detected"
+                      className="max-w-full h-auto rounded-lg mt-4"
+                    />
+                  )}
+                  <h3 className="text-xl  mt-4"><span className="font-bold">Crop Type: </span>{response.symptomsProvided}</h3>
+                  
                 </div>
               </div>
             </div>
           )}
         </section>
-
-        {/* Service Providers Section */}
-        {serviceProviders.length > 0 && (
-          <section className="bg-white p-6 rounded-lg shadow-md mt-8">
-            <h3 className="text-2xl mb-4">Service Providers for {response.split(":")[1]}</h3>
-            <table className="min-w-full bg-white border border-gray-200">
-              <thead>
-                <tr>
-                  <th className="py-2 px-4 border-b text-left">Name</th>
-                  <th className="py-2 px-4 border-b text-left">Mobile</th>
-                  <th className="py-2 px-4 border-b text-left">Service Provided</th>
-                  <th className="py-2 px-4 border-b text-left">Location</th>
-                  <th className="py-2 px-4 border-b text-left">Email</th>
-                </tr>
-              </thead>
-              <tbody>
-                {serviceProviders.map((provider, index) => (
-                  <tr key={index}>
-                    <td className="py-2 px-4 border-b">{provider.name}</td>
-                    <td className="py-2 px-4 border-b">{provider.mobile}</td>
-                    <td className="py-2 px-4 border-b">{provider.service}</td>
-                    <td className="py-2 px-4 border-b">{provider.location}</td>
-                    <td className="py-2 px-4 border-b">{provider.email}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </section>
-        )}
       </div>
     </div>
   );
