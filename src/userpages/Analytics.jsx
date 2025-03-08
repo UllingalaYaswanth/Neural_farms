@@ -726,23 +726,78 @@ const AnalyticsAndReports = () => {
       "Last 1 year": [1300, 1400, 1600, 2000, 2300, 2500, 2800, 3000, 3200, 3400, 3600, 3800],
       "Last 3 years": [1400, 1600, 1800, 2100, 2500, 2700, 3000, 3200, 3400, 3500, 3700, 3800, 4000, 4200, 4300],
     },
-    farmEquipmentUsage: {
+    farmEquipmentUsage : {
       "Last 6 months": [
-        { equipment: "Tractor", used: "Jan, Mar, Jun", totalUsage: 3, frequency: "Every 2 months" },
-        { equipment: "Plow", used: "Feb, Apr, May", totalUsage: 3, frequency: "Every 2 months" },
-        { equipment: "Harvester", used: "Apr, Jun", totalUsage: 2, frequency: "Every 3 months" },
+        { 
+          equipment: "Tractor", 
+          used: "Jan, Mar, Jun", 
+          totalUsage: 3, 
+          frequency: "Every 2 months", 
+          price: "$500 per use"
+        },
+        { 
+          equipment: "Plow", 
+          used: "Feb, Apr, May", 
+          totalUsage: 3, 
+          frequency: "Every 2 months", 
+          price: "$300 per use"
+        },
+        { 
+          equipment: "Harvester", 
+          used: "Apr, Jun", 
+          totalUsage: 2, 
+          frequency: "Every 3 months", 
+          price: "$700 per use"
+        },
       ],
       "Last 1 year": [
-        { equipment: "Tractor", used: "Jan, Mar, Apr, May, Nov", totalUsage: 5, frequency: "Every 2-3 months" },
-        { equipment: "Plow", used: "Feb, Jun, Sep, Oct", totalUsage: 4, frequency: "Every 3 months" },
-        { equipment: "Harvester", used: "Mar, Jun, Oct", totalUsage: 3, frequency: "Every 4 months" },
+        { 
+          equipment: "Tractor", 
+          used: "Jan, Mar, Apr, May, Nov", 
+          totalUsage: 5, 
+          frequency: "Every 2-3 months", 
+          price: "$500 per use"
+        },
+        { 
+          equipment: "Plow", 
+          used: "Feb, Jun, Sep, Oct", 
+          totalUsage: 4, 
+          frequency: "Every 3 months", 
+          price: "$300 per use"
+        },
+        { 
+          equipment: "Harvester", 
+          used: "Mar, Jun, Oct", 
+          totalUsage: 3, 
+          frequency: "Every 4 months", 
+          price: "$700 per use"
+        },
       ],
       "Last 3 years": [
-        { equipment: "Tractor", used: "Jan, Mar, Apr, May, Jul, Aug", totalUsage: 6, frequency: "Every 2-3 months" },
-        { equipment: "Plow", used: "Feb, Jun, Sep, Oct", totalUsage: 4, frequency: "Every 3 months" },
-        { equipment: "Harvester", used: "Mar, Apr, Jul, Oct", totalUsage: 4, frequency: "Every 3 months" },
+        { 
+          equipment: "Tractor", 
+          used: "Jan, Mar, Apr, May, Jul, Aug", 
+          totalUsage: 6, 
+          frequency: "Every 2-3 months", 
+          price: "$500 per use"
+        },
+        { 
+          equipment: "Plow", 
+          used: "Feb, Jun, Sep, Oct", 
+          totalUsage: 4, 
+          frequency: "Every 3 months", 
+          price: "$300 per use"
+        },
+        { 
+          equipment: "Harvester", 
+          used: "Mar, Apr, Jul, Oct", 
+          totalUsage: 4, 
+          frequency: "Every 3 months", 
+          price: "$700 per use"
+        },
       ],
-    },
+    }
+    
   });
 
   const [selectedDateRange, setSelectedDateRange] = useState("Last 6 months");
@@ -941,6 +996,7 @@ const AnalyticsAndReports = () => {
               <h3 className="text-lg font-semibold">{equipment.equipment}</h3>
               <p className="text-sm text-gray-600">Used: {equipment.used}</p>
               <p className="text-sm text-gray-600">Total Usage: {equipment.totalUsage}</p>
+              <p className="text-sm text-gray-600">Price: {equipment.price}</p>
               <p className="text-sm text-gray-600">Frequency: {equipment.frequency}</p>
             </div>
           ))}
