@@ -330,9 +330,11 @@ const CropMonitoring = () => {
   
 
   return (
-    <div className="p-8 bg-gray-100 min-h-screen">
-      <h1 className="text-3xl font-semibold mb-6 text-center">Crop Monitoring</h1>
-      
+    <div className="p-8 bg-[#eaece4] min-h-screen">
+      {/* <h1 className="text-3xl font-semibold mb-6 text-center">Crop Monitoring</h1> */}
+      <h1 className="text-4xl font-extrabold mb-6 text-center text-green-700">
+    Crop Monitoring
+  </h1>
       {/* Crop Selection */}
       <div className="mb-6 flex justify-between items-center">
         <select
@@ -347,7 +349,7 @@ const CropMonitoring = () => {
         <div className="flex justify-center mb-6">
         <button
           onClick={openModal}
-          className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
         Land Registration Form
         </button>
@@ -594,17 +596,8 @@ const CropMonitoring = () => {
               </div>
 
               {/* Submit Button */}
-              <div className="flex justify-center">
-                <button
-                  type="submit"
-                  className="w-full md:w-auto inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                  Submit
-                </button>
-              </div>
-            </form>
-            {/* Close Modal Button */}
-            <div className="mt-4 text-center">
+              <div className="flex justify-between">
+              <div className="mt-4 text-center">
               <button
                 onClick={closeModal}
                 className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-gray-700 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
@@ -612,6 +605,16 @@ const CropMonitoring = () => {
                 Close
               </button>
             </div>
+                <button
+                  type="submit"
+                  className="w-full md:w-auto inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+            {/* Close Modal Button */}
+
           </div>
         </div>
       )}

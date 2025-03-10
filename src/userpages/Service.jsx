@@ -1526,7 +1526,7 @@ const FarmerServiceRegistrationForm = ({ onClose }) => {
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none"
+              className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none"
             >
               Submit
             </button>
@@ -1545,6 +1545,129 @@ const FarmerDashboard = () => {
   const dummyData = [
     {
       id: 1,
+      name: 'Sai Kumar',
+      farmName: 'Green Acres',
+      email: 'sai@example.com',
+      phone: '9321567890',
+      cropType: 'Wheat',
+      farmArea: '50',
+      address: '123 Farm Lane',
+      serviceTypes: [
+        'Soil Testing',
+        'Drone Service',
+        'Irrigation Services',
+
+      ],
+      location: [21.215000, 76.880000], // Latitude and Longitude
+    },
+   
+    {
+      id: 5,
+      name: 'Neha Rao',
+      farmName: 'Golden Fields',
+      email: 'neha@example.com',
+      phone: '9345678910',
+      cropType: 'Maize',
+      farmArea: '100',
+      address: '123 Golden Valley',
+      serviceTypes: [
+        'Soil Testing',
+        'Drone Service',
+        'Market Access & Sales Support',
+        'Precision Agriculture',
+        'Climate and Weather Advisory',
+        'Post-Harvest Processing'
+      ],
+      location: [21.213700, 76.879376],
+    },
+    {
+      id: 6,
+      name: 'Harish Kumar',
+      farmName: 'Mountain View Farms',
+      email: 'harish@example.com',
+      phone: '9988775432',
+      cropType: 'Barley',
+      farmArea: '60',
+      address: '258 Mountain Road',
+      serviceTypes: [
+        'Soil Testing',
+        'Drone Service',
+        'Irrigation Services',
+        'Pest and Disease Monitoring',
+      ],
+      location: [21.214200, 76.877500],
+    },
+    {
+      id: 7,
+      name: 'Meera Iyer',
+      farmName: 'Blue Sky Farms',
+      email: 'meera@example.com',
+      phone: '9876549870',
+      cropType: 'Sugarcane',
+      farmArea: '150',
+      address: '567 Sugarcane Road',
+      serviceTypes: [
+        'Soil Testing',
+        'Drone Service',
+        'Irrigation Services',
+        'Precision Agriculture',
+        'Post-Harvest Processing'
+      ],
+      location: [21.210500, 76.879800],
+    },
+    {
+      id: 8,
+      name: 'Vikram Singh',
+      farmName: 'Eastwood Gardens',
+      email: 'vikram@example.com',
+      phone: '9321561234',
+      cropType: 'Grapes',
+      farmArea: '45',
+      address: '678 Vineyard Street',
+      serviceTypes: [
+
+        'Climate and Weather Advisory',
+        'Post-Harvest Processing'
+      ],
+      location: [21.211800, 76.876500],
+    },
+    {
+      id: 9,
+      name: 'Priya Gupta',
+      farmName: 'Lush Meadows',
+      email: 'priya@example.com',
+      phone: '9988771122',
+      cropType: 'Peppers',
+      farmArea: '80',
+      address: '101 Lush Meadows Lane',
+      serviceTypes: [
+        'Soil Testing',
+        'Irrigation Services',
+        'Pest and Disease Monitoring',
+        'Fertilization Services',
+
+      ],
+      location: [21.213300, 76.874600],
+    },
+    {
+      id: 10,
+      name: 'Rahul Desai',
+      farmName: 'Golden Harvests',
+      email: 'rahul@example.com',
+      phone: '9345671234',
+      cropType: 'Cotton',
+      farmArea: '110',
+      address: '89 Cotton Road',
+      serviceTypes: [
+        'Harvest Storage & Handling',
+        'Market Access & Sales Support',
+        'Precision Agriculture',
+        'Post-Harvest Processing'
+      ],
+      location: [21.210000, 76.875200],
+    },
+    {
+      id: 11,
       name: 'Sai kumar',
       farmName: 'Green Acres',
       email: 'sai@example.com',
@@ -1553,10 +1676,10 @@ const FarmerDashboard = () => {
       farmArea: '50',
       address: '123 Farm Lane',
       serviceTypes: ['Soil Testing', 'Drone Service'],
-      location: [51.505, -0.09], // Latitude and Longitude
+      location: [21.212000, 76.874000], // Latitude and Longitude
     },
     {
-      id: 2,
+      id: 12,
       name: 'Rajesh',
       farmName: 'Golden Fields',
       email: 'rajesh@example.com',
@@ -1565,10 +1688,10 @@ const FarmerDashboard = () => {
       farmArea: '100',
       address: '456 Harvest Road',
       serviceTypes: ['Irrigation Services', 'Pest and Disease Monitoring'],
-      location: [51.51, -0.1], // Latitude and Longitude
+      location: [21.214500, 76.873000], // Latitude and Longitude
     },
     {
-      id: 3,
+      id: 13,
       name: 'Ganesh',
       farmName: 'Sunrise Farms',
       email: 'ganesh@example.com',
@@ -1577,7 +1700,7 @@ const FarmerDashboard = () => {
       farmArea: '75',
       address: '789 Rice Field',
       serviceTypes: ['Crop Health Monitoring', 'Weed Control'],
-      location: [51.49, -0.08], // Latitude and Longitude
+      location: [21.215500, 76.881200], // Latitude and Longitude
     },
   ];
 
@@ -1586,19 +1709,19 @@ const FarmerDashboard = () => {
       id: 1,
       name: 'AgriTech Solutions',
       serviceType: 'Soil Testing',
-      location: [51.505, -0.08], // Latitude and Longitude
+      location: [21.217000, 76.882000], // Latitude and Longitude
     },
     {
       id: 2,
       name: 'Drone Masters',
       serviceType: 'Drone Service',
-      location: [51.51, -0.09], // Latitude and Longitude
+      location: [21.218500, 76.877800], // Latitude and Longitude
     },
     {
       id: 3,
       name: 'Irrigation Pros',
       serviceType: 'Irrigation Services',
-      location: [51.49, -0.1], // Latitude and Longitude
+      location: [21.216200, 76.874300], // Latitude and Longitude
     },
   ];
 
@@ -1615,9 +1738,9 @@ const FarmerDashboard = () => {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-6 bg-[#eaece4] min-h-screen">
       {/* Header */}
-      <h1 className="text-2xl font-bold mb-4">Farmer Dashboard</h1>
+      <h1 className="text-4xl font-extrabold mb-6 text-center text-green-700">Service Request</h1>
 
       {/* View Toggle Buttons */}
   
@@ -1654,8 +1777,8 @@ const FarmerDashboard = () => {
           onClick={() => setView('table')}
           className={`px-4 py-2 rounded-md mr-2 ${
             view === 'table'
-              ? 'bg-indigo-600 text-white'
-              : 'bg-gray-200 text-gray-700'
+              ? 'bg-green-600 text-white'
+              : 'bg-gray-300 text-gray-700'
           }`}
         >
           Table View
@@ -1664,8 +1787,8 @@ const FarmerDashboard = () => {
           onClick={() => setView('map')}
           className={`px-4 py-2 rounded-md ${
             view === 'map'
-              ? 'bg-indigo-600 text-white'
-              : 'bg-gray-200 text-gray-700'
+              ? 'bg-green-600 text-white'
+              : 'bg-gray-300 text-gray-700'
           }`}
         >
           Map View
@@ -1673,7 +1796,7 @@ const FarmerDashboard = () => {
       </div>
       <button
         onClick={() => setIsModalOpen(true)}
-        className="px-4 py-2 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:outline-none mb-4"
+        className="px-4 py-2 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 focus:outline-none mb-4"
       >
         Raise Request
       </button>
@@ -1708,8 +1831,8 @@ const FarmerDashboard = () => {
       {/* Map View */}
       {view === 'map' && (
         <MapContainer
-          center={[51.505, -0.09]}
-          zoom={13}
+          center={[21.216200, 76.874300]}
+          zoom={16}
           style={{ height: '500px', width: '100%' }}
         >
           <TileLayer

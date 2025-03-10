@@ -733,21 +733,21 @@ const AnalyticsAndReports = () => {
           used: "Jan, Mar, Jun", 
           totalUsage: 3, 
           frequency: "Every 2 months", 
-          price: "$500 per use"
+          price: "₹500 per use"
         },
         { 
           equipment: "Plow", 
           used: "Feb, Apr, May", 
           totalUsage: 3, 
           frequency: "Every 2 months", 
-          price: "$300 per use"
+          price: "₹300 per use"
         },
         { 
           equipment: "Harvester", 
           used: "Apr, Jun", 
           totalUsage: 2, 
           frequency: "Every 3 months", 
-          price: "$700 per use"
+          price: "₹700 per use"
         },
       ],
       "Last 1 year": [
@@ -756,21 +756,21 @@ const AnalyticsAndReports = () => {
           used: "Jan, Mar, Apr, May, Nov", 
           totalUsage: 5, 
           frequency: "Every 2-3 months", 
-          price: "$500 per use"
+          price: "₹500 per use"
         },
         { 
           equipment: "Plow", 
           used: "Feb, Jun, Sep, Oct", 
           totalUsage: 4, 
           frequency: "Every 3 months", 
-          price: "$300 per use"
+          price: "₹300 per use"
         },
         { 
           equipment: "Harvester", 
           used: "Mar, Jun, Oct", 
           totalUsage: 3, 
           frequency: "Every 4 months", 
-          price: "$700 per use"
+          price: "₹700 per use"
         },
       ],
       "Last 3 years": [
@@ -779,21 +779,21 @@ const AnalyticsAndReports = () => {
           used: "Jan, Mar, Apr, May, Jul, Aug", 
           totalUsage: 6, 
           frequency: "Every 2-3 months", 
-          price: "$500 per use"
+          price: "₹500 per use"
         },
         { 
           equipment: "Plow", 
           used: "Feb, Jun, Sep, Oct", 
           totalUsage: 4, 
           frequency: "Every 3 months", 
-          price: "$300 per use"
+          price: "₹300 per use"
         },
         { 
           equipment: "Harvester", 
           used: "Mar, Apr, Jul, Oct", 
           totalUsage: 4, 
           frequency: "Every 3 months", 
-          price: "$700 per use"
+          price: "₹700 per use"
         },
       ],
     }
@@ -820,7 +820,7 @@ const AnalyticsAndReports = () => {
     labels: data.revenue.length > 6 ? ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] : ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
     datasets: [
       {
-        label: "Revenue ($)",
+        label: "Revenue (₹)",
         data: data.revenue,
         borderColor: "#4caf50",
         backgroundColor: "rgba(76, 175, 80, 0.5)",
@@ -835,7 +835,7 @@ const AnalyticsAndReports = () => {
     labels: data.laborCost.length > 6 ? ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] : ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
     datasets: [
       {
-        label: "Labor Cost ($)",
+        label: "Labor Cost (₹)",
         data: data.laborCost,
         backgroundColor: "#f44336",
         borderColor: "#d32f2f",
@@ -849,7 +849,7 @@ const AnalyticsAndReports = () => {
     labels: data.costOfGoodsSold.length > 6 ? ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] : ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
     datasets: [
       {
-        label: "Cost of Goods Sold ($)",
+        label: "Cost of Goods Sold (₹)",
         data: data.costOfGoodsSold,
         backgroundColor: "rgba(33, 150, 243, 0.5)",
         borderColor: "#2196f3",
@@ -863,7 +863,7 @@ const AnalyticsAndReports = () => {
     labels: data.profitMargin.length > 6 ? ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] : ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
     datasets: [
       {
-        label: "Profit Margin ($)",
+        label: "Profit Margin (₹)",
         data: data.profitMargin,
         backgroundColor: "rgba(255, 152, 0, 0.5)",
         borderColor: "#ff9800",
@@ -879,8 +879,8 @@ const AnalyticsAndReports = () => {
   };
 
   return (
-    <div className="p-8 bg-gray-50 min-h-screen">
-      <h1 className="text-3xl font-semibold mb-6 text-center text-gray-800">Farm Analytics & Reports</h1>
+    <div className="p-8 bg-[#eaece4] min-h-screen">
+      <h1 className="text-4xl font-extrabold mb-6 text-center text-green-700">Farm Analytics & Reports</h1>
 
       {/* Date Range Filter */}
       <div className="mb-6 flex justify-between items-center">
@@ -902,9 +902,9 @@ const AnalyticsAndReports = () => {
             <FaRegChartBar className="mr-2 text-3xl text-green-500" />
             Revenue, Investment & Profit
           </h2>
-          <p className="text-lg font-bold">{`Revenue: $${data.revenue[data.revenue.length - 1]}`}</p>
-          <p className="text-sm text-gray-500">Investment: $1500</p>
-          <p className="text-sm text-gray-500">Profit: ${data.profitMargin[data.profitMargin.length - 1]}</p>
+          <p className="text-lg font-bold">{`Revenue: ₹${data.revenue[data.revenue.length - 1]}`}</p>
+          <p className="text-sm text-gray-500">Investment: ₹1500</p>
+          <p className="text-sm text-gray-500">Profit: ₹{data.profitMargin[data.profitMargin.length - 1]}</p>
         </div>
          {/* Labor Cost */}
          <div className="bg-white shadow-lg rounded-lg p-6 hover:shadow-xl transition-all">
@@ -912,7 +912,7 @@ const AnalyticsAndReports = () => {
              <FaRegChartBar className="mr-2 text-3xl text-red-500" />
              Labor Cost
            </h2>
-           <p className="text-lg font-bold">{`$${data.laborCost[data.laborCost.length - 1]}`}</p>
+           <p className="text-lg font-bold">{`₹${data.laborCost[data.laborCost.length - 1]}`}</p>
            <p className="text-sm text-gray-500">Labor cost for the selected range</p>
       </div>
       </div>
@@ -929,7 +929,7 @@ const AnalyticsAndReports = () => {
             plugins: {
               tooltip: {
                 callbacks: {
-                  label: (tooltipItem) => `$${tooltipItem.raw.toFixed(2)}`,
+                  label: (tooltipItem) => `₹${tooltipItem.raw.toFixed(2)}`,
                 }
               },
               datalabels: {

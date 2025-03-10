@@ -398,7 +398,7 @@ app.add_middleware(
 )
 
 # Log in to Hugging Face with your token
-token = os.getenv("token")  # Replace with your actual token
+token = os.getenv("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")  # Replace with your actual token
 login(token=token, add_to_git_credential=True)
 
 # Load the model and tokenizer for image analysis
@@ -454,7 +454,7 @@ def process_image(image: Image.Image, symptoms_input: str):
     enc_image = model.encode_image(original_image)
     
     # Get the answer about the image
-    ans = model.answer_question(enc_image, "Describe what you see in the image such as color, shape, size and what it may be in detail.", tokenizers)
+    ans = model.answer_question(enc_image, "Describe what you see in the image such as color, shape, size and what it may be in detail. Dont add prompt template or any other extra details. don't put any markdowns", tokenizers)
     
     # Get YOLO detection results for text analysis
     detection_info = ""
@@ -473,7 +473,7 @@ def process_image(image: Image.Image, symptoms_input: str):
             detection_info = "No objects detected"
     
     # Combine answers for the final input
-    prompt_question = "Describe what you know about this, including what measures to take and who to talk to about this."
+    prompt_question = "Describe what you know about this, including what measures to take and who to talk to about this.Dont add prompt template or any other extra details. don't put any markdowns"
     input_text = ans + " " + detection_info + " " + prompt_question
 
     # Create prompt template for instruction-tuned model

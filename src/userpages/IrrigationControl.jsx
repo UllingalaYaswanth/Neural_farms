@@ -60,8 +60,8 @@ const IrrigationControl = () => {
   };
 
   return (
-    <div className="p-8 bg-gray-100 min-h-screen">
-      <h1 className="text-3xl font-semibold mb-6 text-center">Irrigation Control Dashboard</h1>
+    <div className="p-8 bg-[#eaece4] min-h-screen">
+      <h1 className="text-4xl font-extrabold mb-6 text-center text-green-700">Irrigation Control Dashboard</h1>
 
       {/* Main Dashboard Layout */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

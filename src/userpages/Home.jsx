@@ -817,7 +817,7 @@ const Dashboard = () => {
   const farmsData = [
     {
       name: "Farm 1",
-      location: { lat: 21.1281, lng: 75.4273 }, // San Francisco, for example
+      location: { lat: 21.212700, lng: 76.878376 }, // San Francisco, for example
       area: "100 hectares",
       cropYieldData: [400, 420, 460, 480, 500, 520],
       irrigationEfficiencyData: [80, 85, 90, 92, 94, 95],
@@ -827,6 +827,7 @@ const Dashboard = () => {
         organicMatter: "High",
         healthCondition: "Optimal",
       },
+      color:'#4CAF50' ,
       cropHealthData: { health: "80%", condition: "Good" },
       irrigationData: { status: "Active", nextWatering: "2024-12-02, 6:00 AM" },
       pestData: { status: "None", lastChecked: "2024-12-20" },
@@ -840,7 +841,7 @@ const Dashboard = () => {
     },
     {
       name: "Farm 2",
-      location: { lat: 21.0333, lng: 75.6000 }, // Los Angeles, for example
+      location: { lat: 21.243382, lng: 77.013559 }, // Los Angeles, for example
       area: "120 hectares",
       cropYieldData: [380, 410, 450, 470, 490, 510],
       irrigationEfficiencyData: [75, 80, 85, 88, 90, 92],
@@ -863,7 +864,7 @@ const Dashboard = () => {
     },
     {
       name: "Farm 3",
-      location: { lat: 20.5778, lng: 76.8517 }, // New York, for example
+      location: { lat: 21.249142, lng: 77.035789 }, // New York, for example
       area: "150 hectares",
       cropYieldData: [420, 440, 480, 500, 520, 540],
       irrigationEfficiencyData: [85, 88, 90, 92, 94, 96],
@@ -944,13 +945,13 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="p-8 bg-gray-100">
+    <div className="p-8 bg-[#eaece4]">
       {/* <h1 className="text-3xl font-semibold mb-6">User Dashboard</h1> */}
 
       {/* Map and Farm Locations */}
       <div className="mb-6">
         <h2 className="text-xl font-semibold mb-4">Farm Locations</h2>
-        <MapContainer center={[21.1281, 75.4273]} zoom={6} style={{ height: "400px", width: "100%" }}>
+        <MapContainer center={[21.212700, 76.878376]} zoom={10} style={{ height: "400px", width: "100%" }}>
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           {farmsData.map((farm, index) => (
             <Marker key={index} position={farm.location}>
@@ -976,8 +977,8 @@ const Dashboard = () => {
 
       {/* Farm Information & Stats */}
       <div className="bg-white shadow-lg rounded-lg p-6 mb-6">
-        <h2 className="text-xl font-semibold mb-4">Farm Details</h2>
-        <div className="flex flex-col">
+        <h2 className="text-xl  font-semibold mb-4">Farm Details</h2>
+        <div className="flex flex-col text-gray-500">
           <p className="text-sm">Farm Name: {selectedFarmData.name}</p>
           <p className="text-sm">Location: {selectedFarmData.location.lat}, {selectedFarmData.location.lng}</p>
           <p className="text-sm">Area: {selectedFarmData.area}</p>
@@ -986,20 +987,20 @@ const Dashboard = () => {
 
       {/* Dashboard Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-        <div className="bg-white shadow-lg rounded-lg p-6">
+        <div className="bg-white shadow-lg rounded-lg p-6 hover:bg-[#4CAF50] text-gray-500 hover:text-white transition duration-300">
           <h2 className="text-xl font-semibold mb-2">Soil Health</h2>
           <div className="mt-4 flex justify-between items-center">
             <div>
-              <p className="text-sm text-gray-500">Soil pH: {selectedFarmData.soilHealthData.ph}</p>
-              <p className="text-sm text-gray-500">Soil Texture: {selectedFarmData.soilHealthData.texture}</p>
-              <p className="text-sm text-gray-500">Organic Matter: {selectedFarmData.soilHealthData.organicMatter}</p>
-              <p className="text-sm text-gray-500">Health Condition: {selectedFarmData.soilHealthData.healthCondition}</p>
+              <p className="text-sm ">Soil pH: {selectedFarmData.soilHealthData.ph}</p>
+              <p className="text-sm ">Soil Texture: {selectedFarmData.soilHealthData.texture}</p>
+              <p className="text-sm ">Organic Matter: {selectedFarmData.soilHealthData.organicMatter}</p>
+              <p className="text-sm ">Health Condition: {selectedFarmData.soilHealthData.healthCondition}</p>
             </div>
             <GiEarthAmerica className="text-3xl text-brown-500" />
           </div>
         </div>
 
-        <div className="bg-white shadow-lg rounded-lg p-6">
+        <div className="bg-white shadow-lg rounded-lg p-6 hover:bg-[#4CAF50] text-gray-500 hover:text-white transition duration-300">
           <h2 className="text-xl font-semibold mb-2">Crop Health</h2>
           <div className="flex justify-between items-center">
             <p className="text-lg font-semibold">{selectedFarmData.cropHealthData.health}</p>
@@ -1008,7 +1009,7 @@ const Dashboard = () => {
           <p className="text-sm text-gray-500 mt-2">Condition: {selectedFarmData.cropHealthData.condition}</p>
         </div>
 
-        <div className="bg-white shadow-lg rounded-lg p-6">
+        <div className="bg-white shadow-lg rounded-lg p-6 hover:bg-[#4CAF50] text-gray-500 hover:text-white transition duration-300">
           <h2 className="text-xl font-semibold mb-2">Irrigation Status & Control</h2>
           <div className="flex justify-between items-center">
             <p className="text-lg font-semibold">{selectedFarmData.irrigationData.status}</p>
@@ -1017,14 +1018,14 @@ const Dashboard = () => {
           <p className="text-sm text-gray-500 mt-2">Next Watering: {selectedFarmData.irrigationData.nextWatering}</p>
         </div>
 
-        <div className="bg-white shadow-lg rounded-lg p-6 mb-6">
+        <div className="bg-white shadow-lg rounded-lg p-6 mb-6 hover:bg-[#4CAF50] text-gray-500 hover:text-white transition duration-300">
           <h2 className="text-xl font-semibold mb-4 flex items-center space-x-2">
             <FaSeedling className="text-green-500" />
             <span>Crop Monitoring</span>
           </h2>
 
           {/* Crop Monitoring Data */}
-          <div className="space-y-4 overflow-y-scroll max-h-[200px]">
+          <div className="space-y-4 overflow-y-scroll max-h-[200px] ">
             {selectedFarmData.cropMonitoringData.map((item, index) => (
               <div key={index} className="border-b pb-4">
                 <h3 className="font-semibold">{item.crop}</h3>
@@ -1037,7 +1038,7 @@ const Dashboard = () => {
             ))}
           </div>
         </div>
-        <div className="bg-white shadow-lg rounded-lg p-6 mb-6">
+        <div className="bg-white shadow-lg rounded-lg p-6 mb-6 hover:bg-[#4CAF50] text-gray-500 hover:text-white transition duration-300">
            <h2 className="text-xl font-semibold mb-2">Pest Monitoring</h2>
            <div className="flex justify-between items-center">
              <p className="text-lg font-semibold">{selectedFarmData.pestData.status}</p>
@@ -1048,7 +1049,7 @@ const Dashboard = () => {
       
 
        {/* Weather & Climate */}
-       <div className="bg-white shadow-lg rounded-lg p-6 mb-6">
+       <div className="bg-white shadow-lg rounded-lg p-6 mb-6 hover:bg-[#4CAF50] text-gray-500 hover:text-white transition duration-300">
          <h2 className="text-xl font-semibold mb-4 flex items-center space-x-2">
            <WiDaySunny className="text-yellow-500" />
            <span>Weather & Climate</span>

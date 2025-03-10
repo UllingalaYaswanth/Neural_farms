@@ -1520,11 +1520,11 @@ const PestDetectionDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-[#eaece4]">
       {/* Header */}
-      <header className="bg-green-500 text-white py-6 text-center">
-        <h1 className="text-4xl">Pest Detection</h1>
-        <p>Your crop protection starts here</p>
+      <header className="text-center py-4">
+        <h1 className="text-4xl font-extrabold text-green-700">Pest Detection</h1>
+        <p className="text-gray-600 text-xl pt-2">Your crop protection starts here</p>
       </header>
 
       {/* Main Content */}

@@ -8,7 +8,7 @@ function Layout() {
     <div>
         <div className='flex'>
             <Sidebar />
-            <div className='w-full ml-16 md:ml-64'>
+            <div className='w-full ml-16 md:ml-64 bg-[#eaece4]'>
                 <Header />
                 <Outlet />
             </div>

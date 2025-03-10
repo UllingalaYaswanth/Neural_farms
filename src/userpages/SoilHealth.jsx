@@ -47,8 +47,8 @@ const SoilHealth = () => {
   };
 
   return (
-    <div className="p-8 bg-gray-100">
-      <h1 className="text-3xl text-center font-semibold mb-6">Soil Health Overview</h1>
+    <div className="p-8 bg-[#eaece4]">
+      <h1 className="text-4xl font-extrabold mb-6 text-center text-green-700">Soil Health Overview</h1>
 
       {/* Main Layout */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">

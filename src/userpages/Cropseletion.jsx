@@ -983,7 +983,7 @@ const CropPrediction = () => {
         crop: "Wheat",
         probability: "75%",
         Estimated_cost: "80000",
-        profitMargin: "$200/acre",
+        profitMargin: "₹20000/acre",
         warehouse: "Warehouse A (5km away)",
         yieldTime: "4 months",
         yieldData: [200, 250, 300, 350], // Historical, Present, Future
@@ -993,7 +993,7 @@ const CropPrediction = () => {
         crop: "Rice",
         probability: "60%",
         Estimated_cost: "200000",
-        profitMargin: "$180/acre",
+        profitMargin: "₹18000/acre",
         warehouse: "Warehouse B (10km away)",
         yieldTime: "5 months",
         yieldData: [150, 180, 200, 220],
@@ -1003,7 +1003,7 @@ const CropPrediction = () => {
         crop: "Corn",
         probability: "65%",
         Estimated_cost: "100000",
-        profitMargin: "$220/acre",
+        profitMargin: "₹22000/acre",
         warehouse: "Warehouse C (8km away)",
         yieldTime: "3.5 months",
         yieldData: [220, 240, 260, 280],
@@ -1036,10 +1036,10 @@ const CropPrediction = () => {
   });
 
   return (
-    <div className="p-6 min-h-screen">
+    <div className="p-6 min-h-screen bg-[#eaece4]">
       {/* Header */}
       <header className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-green-800">
+        <h1 className="text-4xl font-extrabold text-center text-green-700">
           Crop Prediction Service
         </h1>
         <p className="text-gray-600 mt-2">
