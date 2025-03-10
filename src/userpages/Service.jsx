@@ -1666,18 +1666,7 @@ const FarmerDashboard = () => {
       ],
       location: [21.210000, 76.875200],
     },
-    {
-      id: 11,
-      name: 'Sai kumar',
-      farmName: 'Green Acres',
-      email: 'sai@example.com',
-      phone: '9321567890',
-      cropType: 'Wheat',
-      farmArea: '50',
-      address: '123 Farm Lane',
-      serviceTypes: ['Soil Testing', 'Drone Service'],
-      location: [21.212000, 76.874000], // Latitude and Longitude
-    },
+   
     {
       id: 12,
       name: 'Rajesh',

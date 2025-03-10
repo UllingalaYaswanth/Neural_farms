@@ -968,10 +968,10 @@ const CropPrediction = () => {
 
   // Dummy data for farmer and neighboring farms
   const dummyFarms = [
-    { id: 1, name: "Your Farm", crop: "Wheat", area: '5 acre', position: [51.505, -0.09] }, // Farmer's field
-    { id: 2, name: "Farm A", crop: "Rice", area: '2 acre', position: [51.51, -0.1] },
-    { id: 3, name: "Farm B", crop: "Corn", area: '4 acre', position: [51.5, -0.08] },
-    { id: 4, name: "Farm C", crop: "Barley", area: '1 acre', position: [51.49, -0.07] },
+    { id: 1, name: "Farm B", crop: "Wheat", area: '5 acre', position: [21.212700, 76.899396] }, // Farmer's field
+    { id: 2, name: "Farm A", crop: "Rice", area: '2 acre', position: [21.219142, 76.899396] },
+    { id: 3, name: "Your Farm", crop: "Corn", area: '4 acre', position: [21.212700, 76.878376] },
+    { id: 4, name: "Farm C", crop: "Barley", area: '1 acre', position: [21.223700, 76.860096] },
   ];
 
   const handleCropRequest = (e) => {
@@ -1055,7 +1055,7 @@ const CropPrediction = () => {
         </h2>
         <div className="rounded-lg overflow-hidden shadow-lg">
           <MapContainer
-            center={[51.505, -0.09]} // Default center (can be dynamic)
+            center={[21.212700, 76.878376]} // Default center (can be dynamic)
             zoom={13}
             style={{ height: "400px", width: "100%" }}
           >
