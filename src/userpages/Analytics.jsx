@@ -276,7 +276,7 @@ const AnalyticsAndReports = () => {
             plugins: {
               tooltip: {
                 callbacks: {
-                  label: (tooltipItem) => `$${tooltipItem.raw.toFixed(2)}`,
+                  label: (tooltipItem) => `₹${tooltipItem.raw.toFixed(2)}`,
                 }
               },
               datalabels: {
@@ -300,7 +300,7 @@ const AnalyticsAndReports = () => {
             plugins: {
               tooltip: {
                 callbacks: {
-                  label: (tooltipItem) => `$${tooltipItem.raw.toFixed(2)}`,
+                  label: (tooltipItem) => `₹${tooltipItem.raw.toFixed(2)}`,
                 }
               },
               datalabels: {
