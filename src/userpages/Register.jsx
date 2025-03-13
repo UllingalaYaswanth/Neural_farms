@@ -44,7 +44,7 @@ const RegisterPage = () => {
     { value: 'Drone Service', label: 'Drone Service' },
     { value: 'Irrigation Services', label: 'Irrigation Services' },
     { value: 'Pest and Disease Monitoring', label: 'Pest and Disease Monitoring' },
-    { value: 'Fertilization Services', label: 'Fertilization Services' },
+    { value: 'Fertilization & Seeds Services', label: 'Fertilization & Seeds Services' },
     { value: 'Harvest Planning & Equipment Rental', label: 'Harvest Planning & Equipment Rental' },
     { value: 'Crop Health Monitoring', label: 'Crop Health Monitoring' },
     { value: 'Weed Control', label: 'Weed Control' },

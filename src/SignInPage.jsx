@@ -106,8 +106,8 @@ const RegisterPage = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-green-500 to-green-700">
-       <img src={mbsg} alt="logo" className="absolute w-64 h-auto top-12 left-40" />
-    <img src={mbstechai} alt="logo" className="absolute w-44 h-auto top-16 right-40" />
+       <img src={mbsg} alt="logo" className="absolute w-80 h-auto top-12 left-40" />
+    <img src={mbstechai} alt="logo" className="absolute w-60 h-auto top-16 right-40" />
       <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-md">
         <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">Register for Neural Farms</h2>
         
