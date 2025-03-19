@@ -131,7 +131,7 @@ const FarmerServiceRegistrationForm = ({ onClose }) => {
                 'Drone Service',
                 'Irrigation Services',
                 'Pest and Disease Monitoring',
-                'Fertilization Services',
+                'Fertilization & Seeds Services',
                 'Harvest Planning & Equipment Rental',
                 'Crop Health Monitoring',
                 'Weed Control',

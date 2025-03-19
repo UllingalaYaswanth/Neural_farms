@@ -99,7 +99,7 @@ const Dashboard = () => {
       </div>
       
       {/* Crop Distribution Chart */}
-      <div className="bg-white p-4 rounded-xl shadow-md lg:col-span-2">
+      <div className="bg-white p-4 rounded-xl shadow-md  lg:col-span-2">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-lg font-semibold text-gray-800">Crop Distribution</h2>
           <div className="flex space-x-2">
@@ -117,9 +117,9 @@ const Dashboard = () => {
           </div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3  gap-4">
           <div className="md:col-span-1 flex items-center justify-center">
-            <ResponsiveContainer width={180} height={180}>
+            <ResponsiveContainer width="100%" height={380}>
               <PieChart>
                 <Pie
                   data={cropData}
@@ -139,8 +139,8 @@ const Dashboard = () => {
               </PieChart>
             </ResponsiveContainer>
           </div>
-          <div className="md:col-span-2">
-            <ResponsiveContainer width="100%" height={180}>
+          <div className="md:col-span-2 mt-4">
+            <ResponsiveContainer width="100%" height={370}>
               <BarChart data={cropData}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
                 <XAxis dataKey="name" />
@@ -286,10 +286,50 @@ const Dashboard = () => {
             </div>
           ))}
         </div>
+        
+      </div>
+      <div className="bg-white p-4 rounded-xl shadow-md">
+        <h2 className="text-lg font-semibold text-gray-800 mb-4">Compliance Overview</h2>
+        
+        <div className="flex justify-around mb-4">
+          <div className="text-center">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 text-green-800 text-xl font-bold">
+              82%
+            </div>
+            <p className="mt-1 text-sm text-gray-600">Compliant</p>
+          </div>
+          <div className="text-center">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-yellow-100 text-yellow-800 text-xl font-bold">
+              12%
+            </div>
+            <p className="mt-1 text-sm text-gray-600">Pending</p>
+          </div>
+          <div className="text-center">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-100 text-red-800 text-xl font-bold">
+              6%
+            </div>
+            <p className="mt-1 text-sm text-gray-600">Non-compliant</p>
+          </div>
+        </div>
+        
+        <div className="space-y-2 mt-4">
+          <p className="text-sm font-medium text-gray-700">Non-compliant Farmers</p>
+          {farmers.filter(farmer => farmer.compliance === 'Non-compliant').map((farmer) => (
+            <div key={farmer.id} className="flex justify-between items-center p-2 bg-red-50 rounded-lg">
+              <div>
+                <p className="text-sm font-medium text-gray-800">{farmer.name}</p>
+                <p className="text-xs text-gray-600">{farmer.village}, {farmer.district} District</p>
+              </div>
+              <button className="text-xs px-2 py-1 bg-white border border-red-200 rounded-md text-red-600 hover:bg-red-100">
+                Schedule Visit
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
       
       {/* Soil Health Monitoring */}
-      <div className="bg-white p-4 rounded-xl shadow-md lg:col-span-2">
+      <div className="bg-white p-4 rounded-xl shadow-md lg:col-span-3">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-lg font-semibold text-gray-800">Soil Health Monitoring</h2>
           <select 
@@ -338,45 +378,7 @@ const Dashboard = () => {
       </div>
       
       {/* Compliance Overview */}
-      <div className="bg-white p-4 rounded-xl shadow-md">
-        <h2 className="text-lg font-semibold text-gray-800 mb-4">Compliance Overview</h2>
-        
-        <div className="flex justify-around mb-4">
-          <div className="text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 text-green-800 text-xl font-bold">
-              82%
-            </div>
-            <p className="mt-1 text-sm text-gray-600">Compliant</p>
-          </div>
-          <div className="text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-yellow-100 text-yellow-800 text-xl font-bold">
-              12%
-            </div>
-            <p className="mt-1 text-sm text-gray-600">Pending</p>
-          </div>
-          <div className="text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-100 text-red-800 text-xl font-bold">
-              6%
-            </div>
-            <p className="mt-1 text-sm text-gray-600">Non-compliant</p>
-          </div>
-        </div>
-        
-        <div className="space-y-2 mt-4">
-          <p className="text-sm font-medium text-gray-700">Non-compliant Farmers</p>
-          {farmers.filter(farmer => farmer.compliance === 'Non-compliant').map((farmer) => (
-            <div key={farmer.id} className="flex justify-between items-center p-2 bg-red-50 rounded-lg">
-              <div>
-                <p className="text-sm font-medium text-gray-800">{farmer.name}</p>
-                <p className="text-xs text-gray-600">{farmer.village}, {farmer.district} District</p>
-              </div>
-              <button className="text-xs px-2 py-1 bg-white border border-red-200 rounded-md text-red-600 hover:bg-red-100">
-                Schedule Visit
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
+
     </div>
   );
 };
