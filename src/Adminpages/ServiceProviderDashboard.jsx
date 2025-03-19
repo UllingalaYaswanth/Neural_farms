@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 const ServiceProviderDashboard = () => {
   const [requests, setRequests] = useState([]); // State to hold all requests
@@ -13,6 +14,8 @@ const ServiceProviderDashboard = () => {
   const [scheduledDate, setScheduledDate] = useState(''); // State for scheduled date
   const [activeTab, setActiveTab] = useState('requests'); // State for active tab
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+const [error, setError] = useState(null);
 
   // Hardcoded equipment list with location data
   const equipmentList = [
@@ -115,107 +118,34 @@ const ServiceProviderDashboard = () => {
   ];
 
   // Hardcoded mock data for farmer requests
-  const mockRequests = [
-    {
-      id: 1,
-      name: "Rajesh Kumar",
-      MobileNo: "9876543210",
-      address: "Village Amritpur, Dist. Lucknow, UP",
-      landArea: 5.5,
-      services: ["Plowing", "Seeding"],
-      crop: "Wheat",
-      soilType: "Black soil",
-      status: "pending",
-      requestDate: "2025-03-10",
-      notes: "Requires immediate attention due to upcoming sowing season.",
-      previousService: "Yes",
-      preferredDate: "2025-03-20",
-      location: { lat: 26.8467, lng: 80.8462 } // Near Lucknow
-    },
-    {
-      id: 2,
-      name: "Sunita Patel",
-      MobileNo: "8765432109",
-      address: "Sundarpur, Dist. Varanasi, UP",
-      landArea: 3.2,
-      services: ["Harvesting"],
-      crop: "Rice",
-      soilType: "Alluvial soil",
-      status: "accepted",
-      requestDate: "2025-03-08",
-      notes: "Harvesting needed within 2 weeks.",
-      previousService: "No",
-      scheduledDate: "2025-03-25",
-      assignedEquipment: "Harvester - New Holland TC5.30",
-      preferredDate: "2025-03-22",
-      location: { lat: 25.3176, lng: 82.8739 } // Near Varanasi
-    },
-    {
-      id: 3,
-      name: "Mahesh Singh",
-      MobileNo: "7654321098",
-      address: "Gopalpur, Dist. Kanpur, UP",
-      landArea: 7.8,
-      services: ["Plowing", "Fertilizing", "Seeding"],
-      crop: "Maize",
-      soilType: "Red soil",
-      status: "rejected",
-      requestDate: "2025-03-05",
-      notes: "Land too rocky for our equipment.",
-      previousService: "Yes",
-      preferredDate: "2025-03-15",
-      location: { lat: 26.4499, lng: 80.2319 } // Near Kanpur
-    },
-    {
-      id: 4,
-      name: "Priya Verma",
-      MobileNo: "6543210987",
-      address: "Chandpur, Dist. Agra, UP",
-      landArea: 4.0,
-      services: ["Spraying", "Fertilizing"],
-      crop: "Cotton",
-      soilType: "Sandy soil",
-      status: "pending",
-      requestDate: "2025-03-12",
-      notes: "Pest infestation reported, requires immediate spraying.",
-      previousService: "No",
-      preferredDate: "2025-03-18",
-      location: { lat: 27.1767, lng: 77.9081 } // Near Agra
-    },
-    {
-      id: 5,
-      name: "Ankit Sharma",
-      MobileNo: "5432109876",
-      address: "Dhanpur, Dist. Meerut, UP",
-      landArea: 6.3,
-      services: ["Harvesting", "Transportation"],
-      crop: "Sugarcane",
-      soilType: "Loamy soil",
-      status: "accepted",
-      requestDate: "2025-03-07",
-      notes: "Requires transportation to sugar mill after harvesting.",
-      previousService: "Yes",
-      scheduledDate: "2025-03-24",
-      assignedEquipment: "Tractor - John Deere 5045D",
-      preferredDate: "2025-03-24",
-      location: { lat: 28.9845, lng: 77.6064 } // Near Meerut
-    }
-  ];
-
-  // Load data initially (mock data for now)
   useEffect(() => {
-    // Using mock data for now
-    setRequests(mockRequests);
+    const fetchRequests = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get("http://localhost:5000/api/service/ser_request");
+        setRequests(response.data);
+      } catch (err) {
+        setError("Failed to fetch service requests.");
+        console.error(err);
+      }
+      setLoading(false);
+    };
+  
+    fetchRequests();
   }, []);
-
-  // Handle status update for a request
-  const updateRequestStatus = async (id, status) => {
-    // Using mock update for now
-    const updatedRequests = requests.map((req) =>
-      req.id === id ? { ...req, status } : req
-    );
-    setRequests(updatedRequests);
-  };
+  
+  // // Handle status update for a request
+  // const updateRequestStatus = async (id, status) => {
+  //   try {
+  //     const response = await axios.put(`http://localhost:5000/api/service/ser_request/${id}`, { status });
+  //     setRequests((prevRequests) =>
+  //       prevRequests.map((req) => (req.id === id ? { ...req, status: response.data.status } : req))
+  //     );
+  //   } catch (error) {
+  //     console.error("Failed to update status", error);
+  //   }
+  // };
+  
 
   // Assign equipment and schedule date
   const assignEquipment = (id) => {
@@ -255,6 +185,29 @@ const ServiceProviderDashboard = () => {
       console.log("New update added:", newUpdate);
     }
   };
+
+  // const updateRequestStatus = async (id, status) => {
+  //   // If status is "rejected", remove it from the list
+  //   if (status === "rejected") {
+  //     const updatedRequests = requests.filter(req => req.id !== id);
+  //     setRequests(updatedRequests);
+  //   } else {
+  //     // Otherwise, update the status
+  //     const updatedRequests = requests.map((req) =>
+  //       req.id === id ? { ...req, status } : req
+  //     );
+  //     setRequests(updatedRequests);
+  //   }
+  // };
+  
+  const updateRequestStatus = async (id, status) => {
+    setRequests(prevRequests =>
+      prevRequests.map(req => 
+        req.id === id ? { ...req, status } : req
+      )
+    );
+  };
+  
 
   // Handle opening assign modal
   const openAssignModal = (request) => {

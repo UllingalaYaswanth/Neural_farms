@@ -42,12 +42,48 @@ const FarmerServiceRegistrationForm = ({ onClose }) => {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(formData);
-    onClose(); // Close the modal after submission
+  
+    try {
+      const response = await fetch('http://localhost:5000/api/service/ser_request', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to submit the form');
+      }
+  
+      const result = await response.json();
+      console.log('Form submitted successfully:', result);
+  
+      // Show success message
+      alert(result.message); // Display success message
+  
+      // Optionally reset the form after submission
+      setFormData({
+        name: "",
+        farmName: "",
+        email: "",
+        phone: "",
+        cropType: "",
+        farmArea: "",
+        address: "",
+        serviceTypes: [],
+      });
+  
+      // Close the modal after successful submission
+      onClose();
+    } catch (error) {
+      console.error('Error submitting the form:', error.message);
+      alert('Failed to submit the form. Please try again.');
+    }
   };
-
+  
   return (
     <div className="fixed z-40 inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
       <div className="bg-white p-6 rounded-lg shadow-lg w-[50%] overflow-y-scroll max-h-[95vh]">
