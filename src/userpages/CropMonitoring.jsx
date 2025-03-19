@@ -444,8 +444,7 @@ const cropData = {
 
 const CropMonitoring = () => {
   const [selectedCrop, setSelectedCrop] = useState("Corn");
-  const [formData, setFormData] = useState({ ownerName: "", contactInfo: "", parcels: [{ parcelId: "", location: "", size: "", soilType: "", crops: "" }] });
-  const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   const currentCropData = cropData[selectedCrop];
 
@@ -454,16 +453,69 @@ const CropMonitoring = () => {
     datasets: [{ label: "Growth Stages (%)", data: currentCropData.growthStages, borderColor: "#4caf50", backgroundColor: "rgba(76, 175, 80, 0.2)", fill: true, tension: 0.1 }],
   };
 
-  const handleCropChange = (e) => setSelectedCrop(e.target.value);
-  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
-  const handleParcelChange = (index, e) => {
-    const updatedParcels = [...formData.parcels];
-    updatedParcels[index][e.target.name] = e.target.value;
-    setFormData({ ...formData, parcels: updatedParcels });
+  // Handle crop selection and update data dynamically
+  const handleCropChange = (event) => {
+    const selectedCrop = event.target.value;
+    setSelectedCrop(selectedCrop);
+    setCurrentCropData(cropData[selectedCrop]); // Update the data based on the selected crop
   };
-  const addParcel = () => setFormData({ ...formData, parcels: [...formData.parcels, { parcelId: "", location: "", size: "", soilType: "", crops: "" }] });
-  const removeParcel = (index) => setFormData({ ...formData, parcels: formData.parcels.filter((_, i) => i !== index) });
-  const handleSubmit = (e) => { e.preventDefault(); console.log("Form Data Submitted:", formData); alert("Land details submitted successfully!"); };
+
+
+    const [formData, setFormData] = useState({
+      ownerName: "",
+      contactInfo: "",
+      parcels: [{ parcelId: "", location: "", size: "", soilType: "", crops: "" }],
+    });
+    const [isModalOpen, setIsModalOpen] = useState(false); // State to track modal visibility
+  
+    // Handle input changes for owner details
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setFormData({ ...formData, [name]: value });
+    };
+  
+    // Handle input changes for individual parcel fields
+    const handleParcelChange = (index, e) => {
+      const { name, value } = e.target;
+      const updatedParcels = [...formData.parcels];
+      updatedParcels[index][name] = value;
+      setFormData({ ...formData, parcels: updatedParcels });
+    };
+  
+    // Add a new parcel field dynamically
+    const addParcel = () => {
+      setFormData({
+        ...formData,
+        parcels: [
+          ...formData.parcels,
+          { parcelId: "", location: "", size: "", soilType: "", crops: "" },
+        ],
+      });
+    };
+  
+    // Remove a parcel field
+    const removeParcel = (index) => {
+      const updatedParcels = formData.parcels.filter((_, i) => i !== index);
+      setFormData({ ...formData, parcels: updatedParcels });
+    };
+  
+    // Handle form submission
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      console.log("Form Data Submitted:", formData);
+      alert("Land details submitted successfully!");
+    };
+  
+    // Open modal
+    const openModal = () => {
+      setIsModalOpen(true);
+    };
+  
+    // Close modal
+    const closeModal = () => {
+      setIsModalOpen(false);
+    };
+  
 
   return (
     <div className="p-8 bg-[#eaece4] min-h-screen">
