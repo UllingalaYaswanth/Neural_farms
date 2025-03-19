@@ -92,14 +92,20 @@ const RegisterPage = () => {
     e.preventDefault();
     
     // Dummy check for email and password
-    if (email === 'admin@gmail.com' && password === '123') {
+    if (email === 'service@gmail.com' && password === '123') {
       // Store the role in localStorage
       localStorage.setItem('role', 'admin');
       navigate('/admin');
     } else if (email === 'user@gmail.com' && password === '123') {
       localStorage.setItem('role', 'user');
       navigate('/user');
-    } else {
+      
+    } else if (email === 'admin@gmail.com' && password === '123') {
+      localStorage.setItem('role', 'main');
+      navigate('/main');
+      
+    } 
+    else {
       setErrorMessage('Invalid email or password');
     }
   };
