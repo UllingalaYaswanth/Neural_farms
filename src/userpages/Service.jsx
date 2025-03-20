@@ -46,7 +46,7 @@ const FarmerServiceRegistrationForm = ({ onClose }) => {
     event.preventDefault();
   
     try {
-      const response = await fetch('http://localhost:5000/api/service/ser_request', {
+      const response = await fetch('https://nfbackend.onrender.com/api/service/ser_request', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

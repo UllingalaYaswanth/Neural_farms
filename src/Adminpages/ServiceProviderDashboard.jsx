@@ -122,7 +122,7 @@ const [error, setError] = useState(null);
     const fetchRequests = async () => {
       setLoading(true);
       try {
-        const response = await axios.get("http://localhost:5000/api/service/ser_request");
+        const response = await axios.get("https://nfbackend.onrender.com/api/service/ser_request");
         setRequests(response.data);
       } catch (err) {
         setError("Failed to fetch service requests.");
@@ -134,17 +134,7 @@ const [error, setError] = useState(null);
     fetchRequests();
   }, []);
   
-  // // Handle status update for a request
-  // const updateRequestStatus = async (id, status) => {
-  //   try {
-  //     const response = await axios.put(`http://localhost:5000/api/service/ser_request/${id}`, { status });
-  //     setRequests((prevRequests) =>
-  //       prevRequests.map((req) => (req.id === id ? { ...req, status: response.data.status } : req))
-  //     );
-  //   } catch (error) {
-  //     console.error("Failed to update status", error);
-  //   }
-  // };
+ 
   
 
   // Assign equipment and schedule date
@@ -186,19 +176,7 @@ const [error, setError] = useState(null);
     }
   };
 
-  // const updateRequestStatus = async (id, status) => {
-  //   // If status is "rejected", remove it from the list
-  //   if (status === "rejected") {
-  //     const updatedRequests = requests.filter(req => req.id !== id);
-  //     setRequests(updatedRequests);
-  //   } else {
-  //     // Otherwise, update the status
-  //     const updatedRequests = requests.map((req) =>
-  //       req.id === id ? { ...req, status } : req
-  //     );
-  //     setRequests(updatedRequests);
-  //   }
-  // };
+
   
   const updateRequestStatus = async (id, status) => {
     setRequests(prevRequests =>
