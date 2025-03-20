@@ -286,8 +286,8 @@ const [error, setError] = useState(null);
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
       {/* Header */}
-      <header className="text-black py-4 ">
-        <div className="container mx-auto flex justify-between items-center">
+      <header className="text-black p-5 ">
+        <div className="flex justify-between items-center">
           <h1 className="text-2xl font-bold">Service Provider Dashboard</h1>
           <div className="flex items-center space-x-4">
             <span className="text-sm bg-green-100 text-green-800 px-3 py-1 rounded-full">Online</span>
@@ -295,7 +295,7 @@ const [error, setError] = useState(null);
         </div>
       </header>
 
-      <div className="mx-auto py-3 flex flex-col md:flex-row gap-6">
+      <div className="px-4 flex flex-col md:flex-row gap-6">
         {/* Sidebar - Statistics */}
         <div className="md:w-1/4">
           <div className="bg-white p-6 rounded-lg shadow mb-6">
