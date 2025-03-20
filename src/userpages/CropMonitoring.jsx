@@ -504,7 +504,7 @@ const handleSubmit = async (e) => {
   e.preventDefault();
 
   try {
-    const response = await fetch("http://localhost:5000/api/land/register", {
+    const response = await fetch("https://nfbackend.onrender.com/api/land/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
