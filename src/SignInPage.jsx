@@ -80,6 +80,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import mbstechai from './logo1.png';
 import mbsg from './mbs-g.png'
+import { Link } from 'react-router-dom';
 
 const RegisterPage = () => {
   const [email, setEmail] = useState('');
@@ -160,12 +161,9 @@ const RegisterPage = () => {
         <div className="text-center mt-4">
           <p className="text-sm text-gray-600">
             Don't have an account?{' '}
-            <a
-              href="/register"
-              className="text-green-600 hover:underline"
-            >
+            <Link to="/register" className="text-green-600 hover:underline">
               Register here
-            </a>
+            </Link>
           </p>
         </div>
       </div>
