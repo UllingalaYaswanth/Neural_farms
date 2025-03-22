@@ -45,14 +45,14 @@
 //   const handleSubmit = async (event) => {
 //     event.preventDefault();
   
-    try {
-      const response = await fetch('http://localhost:5000/api/service/ser_request', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+    // try {
+    //   const response = await fetch('http://localhost:5000/api/service/ser_request', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify(formData),
+    //   });
   
 //       if (!response.ok) {
 //         throw new Error('Failed to submit the form');
