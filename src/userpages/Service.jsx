@@ -802,7 +802,7 @@ const FarmerDashboard = () => {
   const fetchHistoryData = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/service/ser_request');
+      const response = await fetch('https://nfbackend.onrender.com/api/service/ser_request');
       if (!response.ok) {
         throw new Error('Failed to fetch history data');
       }
