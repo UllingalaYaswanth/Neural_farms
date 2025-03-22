@@ -499,12 +499,32 @@ const CropMonitoring = () => {
       setFormData({ ...formData, parcels: updatedParcels });
     };
   
-    // Handle form submission
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      console.log("Form Data Submitted:", formData);
-      alert("Land details submitted successfully!");
-    };
+// Handle form submission
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const response = await fetch("https://nfbackend.onrender.com/api/land/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log("Success:", data);
+    alert("Land details submitted successfully!");
+  } catch (error) {
+    console.error("Error submitting form:", error);
+    alert("Failed to submit land details.");
+  }
+};
+
   
     // Open modal
     const openModal = () => {
