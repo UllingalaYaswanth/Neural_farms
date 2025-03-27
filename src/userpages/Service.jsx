@@ -1,542 +1,111 @@
-// import React, { useState } from 'react';
-// import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-// import L from 'leaflet';
-// import 'leaflet/dist/leaflet.css';
-
-// // Fix for default marker icons in Leaflet
-// import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
-// import markerIcon from 'leaflet/dist/images/marker-icon.png';
-// import markerShadow from 'leaflet/dist/images/marker-shadow.png';
-
-// delete L.Icon.Default.prototype._getIconUrl;
-// L.Icon.Default.mergeOptions({
-//   iconRetinaUrl: markerIcon2x,
-//   iconUrl: markerIcon,
-//   shadowUrl: markerShadow,
-// });
-
-// const FarmerServiceRegistrationForm = ({ onClose }) => {
-//   const [formData, setFormData] = useState({
-//     name: '',
-//     farmName: '',
-//     email: '',
-//     phone: '',
-//     cropType: '',
-//     farmArea: '',
-//     address: '',
-//     serviceTypes: [],
-//   });
-
-//   const handleServiceChange = (event) => {
-//     const { value } = event.target;
-//     setFormData((prevData) => {
-//       const newServices = prevData.serviceTypes.includes(value)
-//         ? prevData.serviceTypes.filter((service) => service !== value)
-//         : [...prevData.serviceTypes, value];
-//       return { ...prevData, serviceTypes: newServices };
-//     });
-//   };
-
-//   const handleInputChange = (event) => {
-//     const { name, value } = event.target;
-//     setFormData((prevData) => ({ ...prevData, [name]: value }));
-//   };
-
-//   const handleSubmit = async (event) => {
-//     event.preventDefault();
-  
-    // try {
-    //   const response = await fetch('http://localhost:5000/api/service/ser_request', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify(formData),
-    //   });
-  
-//       if (!response.ok) {
-//         throw new Error('Failed to submit the form');
-//       }
-  
-//       const result = await response.json();
-//       console.log('Form submitted successfully:', result);
-  
-//       // Show success message
-//       alert(result.message); // Display success message
-  
-//       // Optionally reset the form after submission
-//       setFormData({
-//         name: "",
-//         farmName: "",
-//         email: "",
-//         phone: "",
-//         cropType: "",
-//         farmArea: "",
-//         address: "",
-//         serviceTypes: [],
-//       });
-  
-//       // Close the modal after successful submission
-//       onClose();
-//     } catch (error) {
-//       console.error('Error submitting the form:', error.message);
-//       alert('Failed to submit the form. Please try again.');
-//     }
-//   };
-  
-//   return (
-//     <div className="fixed z-40 inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
-//       <div className="bg-white p-6 rounded-lg shadow-lg w-[50%] overflow-y-scroll max-h-[95vh]">
-//         <h2 className="text-xl font-bold mb-4">Raise Request</h2>
-//         <form onSubmit={handleSubmit}>
-//           <div className="mb-4">
-//             <label className="block text-sm font-medium text-gray-700">Name</label>
-//             <input
-//               type="text"
-//               name="name"
-//               value={formData.name}
-//               onChange={handleInputChange}
-//               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-//             />
-//           </div>
-//           <div className="mb-4">
-//             <label className="block text-sm font-medium text-gray-700">Farm Name</label>
-//             <input
-//               type="text"
-//               name="farmName"
-//               value={formData.farmName}
-//               onChange={handleInputChange}
-//               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-//             />
-//           </div>
-//           <div className="mb-4">
-//             <label className="block text-sm font-medium text-gray-700">Email</label>
-//             <input
-//               type="email"
-//               name="email"
-//               value={formData.email}
-//               onChange={handleInputChange}
-//               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-//             />
-//           </div>
-//           <div className="mb-4">
-//             <label className="block text-sm font-medium text-gray-700">Phone</label>
-//             <input
-//               type="tel"
-//               name="phone"
-//               value={formData.phone}
-//               onChange={handleInputChange}
-//               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-//             />
-//           </div>
-//           <div className="mb-4">
-//             <label className="block text-sm font-medium text-gray-700">Crop Type</label>
-//             <input
-//               type="text"
-//               name="cropType"
-//               value={formData.cropType}
-//               onChange={handleInputChange}
-//               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-//             />
-//           </div>
-//           <div className="mb-4">
-//             <label className="block text-sm font-medium text-gray-700">Farm Area (acres)</label>
-//             <input
-//               type="number"
-//               name="farmArea"
-//               value={formData.farmArea}
-//               onChange={handleInputChange}
-//               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-//             />
-//           </div>
-//           <div className="mb-4">
-//             <label className="block text-sm font-medium text-gray-700">Address</label>
-//             <input
-//               type="text"
-//               name="address"
-//               value={formData.address}
-//               onChange={handleInputChange}
-//               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-//             />
-//           </div>
-//           <div className="mb-4">
-//             <label className="block text-sm font-medium text-gray-700">Select Services</label>
-//             <div className="flex flex-wrap gap-2 mt-1">
-//               {[
-//                 'Soil Testing',
-//                 'Drone Service',
-//                 'Irrigation Services',
-//                 'Pest and Disease Monitoring',
-//                 'Fertilization & Seeds Services',
-//                 'Harvest Planning & Equipment Rental',
-//                 'Crop Health Monitoring',
-//                 'Weed Control',
-//                 'Crop Rotation Planning',
-//                 'Harvest Storage & Handling',
-//                 'Market Access & Sales Support',
-//                 'Precision Agriculture',
-//                 'Climate and Weather Advisory',
-//                 'Post-Harvest Processing',
-//               ].map((service) => (
-//                 <label key={service} className="inline-flex items-center">
-//                   <input
-//                     type="checkbox"
-//                     value={service}
-//                     checked={formData.serviceTypes.includes(service)}
-//                     onChange={handleServiceChange}
-//                     className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
-//                   />
-//                   <span className="ml-2 text-sm text-gray-700">{service}</span>
-//                 </label>
-//               ))}
-//             </div>
-//           </div>
-//           <div className="flex justify-end space-x-2">
-//             <button
-//               type="button"
-//               onClick={onClose}
-//               className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 focus:outline-none"
-//             >
-//               Cancel
-//             </button>
-//             <button
-//               type="submit"
-//               className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none"
-//             >
-//               Submit
-//             </button>
-//           </div>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// };
-
-// const FarmerDashboard = () => {
-//   const [isModalOpen, setIsModalOpen] = useState(false);
-//   const [filter, setFilter] = useState({ cropType: '', serviceType: '' });
-//   const [view, setView] = useState('table'); // 'table' or 'map'
-
-//   const dummyData = [
-//     {
-//       id: 1,
-//       name: 'Sai Kumar',
-//       farmName: 'Green Acres',
-//       email: 'sai@example.com',
-//       phone: '9321567890',
-//       cropType: 'Wheat',
-//       farmArea: '50',
-//       address: '123 Farm Lane',
-//       serviceTypes: [
-//         'Soil Testing',
-//         'Drone Service',
-//         'Irrigation Services',
-
-//       ],
-//       location: [21.215000, 76.880000], // Latitude and Longitude
-//     },
-   
-//     {
-//       id: 5,
-//       name: 'Neha Rao',
-//       farmName: 'Golden Fields',
-//       email: 'neha@example.com',
-//       phone: '9345678910',
-//       cropType: 'Maize',
-//       farmArea: '100',
-//       address: '123 Golden Valley',
-//       serviceTypes: [
-//         'Soil Testing',
-//         'Drone Service',
-//         'Market Access & Sales Support',
-//         'Precision Agriculture',
-//         'Climate and Weather Advisory',
-//         'Post-Harvest Processing'
-//       ],
-//       location: [21.213700, 76.879376],
-//     },
-//     {
-//       id: 6,
-//       name: 'Harish Kumar',
-//       farmName: 'Mountain View Farms',
-//       email: 'harish@example.com',
-//       phone: '9988775432',
-//       cropType: 'Barley',
-//       farmArea: '60',
-//       address: '258 Mountain Road',
-//       serviceTypes: [
-//         'Soil Testing',
-//         'Drone Service',
-//         'Irrigation Services',
-//         'Pest and Disease Monitoring',
-//       ],
-//       location: [21.214200, 76.877500],
-//     },
-//     {
-//       id: 7,
-//       name: 'Meera Iyer',
-//       farmName: 'Blue Sky Farms',
-//       email: 'meera@example.com',
-//       phone: '9876549870',
-//       cropType: 'Sugarcane',
-//       farmArea: '150',
-//       address: '567 Sugarcane Road',
-//       serviceTypes: [
-//         'Soil Testing',
-//         'Drone Service',
-//         'Irrigation Services',
-//         'Precision Agriculture',
-//         'Post-Harvest Processing'
-//       ],
-//       location: [21.210500, 76.879800],
-//     },
-//     {
-//       id: 8,
-//       name: 'Vikram Singh',
-//       farmName: 'Eastwood Gardens',
-//       email: 'vikram@example.com',
-//       phone: '9321561234',
-//       cropType: 'Grapes',
-//       farmArea: '45',
-//       address: '678 Vineyard Street',
-//       serviceTypes: [
-
-//         'Climate and Weather Advisory',
-//         'Post-Harvest Processing'
-//       ],
-//       location: [21.211800, 76.876500],
-//     },
-//     {
-//       id: 9,
-//       name: 'Priya Gupta',
-//       farmName: 'Lush Meadows',
-//       email: 'priya@example.com',
-//       phone: '9988771122',
-//       cropType: 'Peppers',
-//       farmArea: '80',
-//       address: '101 Lush Meadows Lane',
-//       serviceTypes: [
-//         'Soil Testing',
-//         'Irrigation Services',
-//         'Pest and Disease Monitoring',
-//         'Fertilization Services',
-
-//       ],
-//       location: [21.213300, 76.874600],
-//     },
-//     {
-//       id: 10,
-//       name: 'Rahul Desai',
-//       farmName: 'Golden Harvests',
-//       email: 'rahul@example.com',
-//       phone: '9345671234',
-//       cropType: 'Cotton',
-//       farmArea: '110',
-//       address: '89 Cotton Road',
-//       serviceTypes: [
-//         'Harvest Storage & Handling',
-//         'Market Access & Sales Support',
-//         'Precision Agriculture',
-//         'Post-Harvest Processing'
-//       ],
-//       location: [21.210000, 76.875200],
-//     },
-   
-//     {
-//       id: 12,
-//       name: 'Rajesh',
-//       farmName: 'Golden Fields',
-//       email: 'rajesh@example.com',
-//       phone: '9876543210',
-//       cropType: 'Corn',
-//       farmArea: '100',
-//       address: '456 Harvest Road',
-//       serviceTypes: ['Irrigation Services', 'Pest and Disease Monitoring'],
-//       location: [21.214500, 76.873000], // Latitude and Longitude
-//     },
-//     {
-//       id: 13,
-//       name: 'Ganesh',
-//       farmName: 'Sunrise Farms',
-//       email: 'ganesh@example.com',
-//       phone: '8347155565',
-//       cropType: 'Rice',
-//       farmArea: '75',
-//       address: '789 Rice Field',
-//       serviceTypes: ['Crop Health Monitoring', 'Weed Control'],
-//       location: [21.215500, 76.881200], // Latitude and Longitude
-//     },
-//   ];
-
-//   const serviceProviders = [
-//     {
-//       id: 1,
-//       name: 'AgriTech Solutions',
-//       serviceType: 'Soil Testing',
-//       location: [21.217000, 76.882000], // Latitude and Longitude
-//     },
-//     {
-//       id: 2,
-//       name: 'Drone Masters',
-//       serviceType: 'Drone Service',
-//       location: [21.218500, 76.877800], // Latitude and Longitude
-//     },
-//     {
-//       id: 3,
-//       name: 'Irrigation Pros',
-//       serviceType: 'Irrigation Services',
-//       location: [21.216200, 76.874300], // Latitude and Longitude
-//     },
-//   ];
-
-//   const filteredData = dummyData.filter(
-//     (item) =>
-//       (!filter.cropType || item.cropType === filter.cropType) &&
-//       (!filter.serviceType ||
-//         item.serviceTypes.some((service) => service === filter.serviceType))
-//   );
-
-//   const handleFilterChange = (e) => {
-//     const { name, value } = e.target;
-//     setFilter((prev) => ({ ...prev, [name]: value }));
-//   };
-
-//   return (
-//     <div className="p-6 bg-[#eaece4] min-h-screen">
-//       {/* Header */}
-//       <h1 className="text-4xl font-extrabold mb-6 text-center text-green-700">Service Request</h1>
-
-//       {/* View Toggle Buttons */}
-  
-// <div className='flex justify-between items-center mb-4'>
-//       {/* Filters */}
-//       <div className="mb-4 flex space-x-4">
-//         <select
-//           name="serviceType"
-//           value={filter.serviceType}
-//           onChange={handleFilterChange}
-//           className="px-3 py-2 border rounded-md"
-//         >
-//           <option value="">All Service Types</option>
-//           <option value="Soil Testing">Soil Testing</option>
-//           <option value="Drone Service">Drone Service</option>
-//           <option value="Irrigation Services">Irrigation Services</option>
-//           <option value="Pest and Disease Monitoring">Pest and Disease Monitoring</option>
-//         </select>
-//       </div>
-//     <div className='flex space-x-5'>
-//       <div className="mb-4">
-//         <button
-//           onClick={() => setView('table')}
-//           className={`px-4 py-2 rounded-md mr-2 ${
-//             view === 'table'
-//               ? 'bg-green-600 text-white'
-//               : 'bg-gray-300 text-gray-700'
-//           }`}
-//         >
-//           Table View
-//         </button>
-//         <button
-//           onClick={() => setView('map')}
-//           className={`px-4 py-2 rounded-md ${
-//             view === 'map'
-//               ? 'bg-green-600 text-white'
-//               : 'bg-gray-300 text-gray-700'
-//           }`}
-//         >
-//           Map View
-//         </button>
-//       </div>
-//       <button
-//         onClick={() => setIsModalOpen(true)}
-//         className="px-4 py-2 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 focus:outline-none mb-4"
-//       >
-//         Raise Request
-//       </button>
-//       </div>
-//       </div>
-//       {/* Table View */}
-//       {view === 'table' && (
-//         <table className="w-full border-collapse border border-gray-300">
-//           <thead>
-//             <tr className="bg-gray-200">
-//               <th className="border border-gray-300 px-4 py-2">Name</th>
-//               <th className="border border-gray-300 px-4 py-2">Services</th>
-//               <th className="border border-gray-300 px-4 py-2">Mobile Number</th>
-//               <th className="border border-gray-300 px-4 py-2">Email Id</th>
-//               <th className="border border-gray-300 px-4 py-2">Address</th>
-//             </tr>
-//           </thead>
-//           <tbody>
-//             {filteredData.map((item) => (
-//               <tr key={item.id}>
-//                 <td className="border border-gray-300 px-4 py-2">{item.name}</td>
-//                 <td className="border border-gray-300 px-4 py-2">{item.serviceTypes.join(', ')}</td>
-//                 <td className="border border-gray-300 px-4 py-2">{item.phone}</td>
-//                 <td className="border border-gray-300 px-4 py-2">{item.email} acres</td>
-//                 <td className="border border-gray-300 px-4 py-2">{item.address}</td>
-//               </tr>
-//             ))}
-//           </tbody>
-//         </table>
-//       )}
-
-//       {/* Map View */}
-//       {view === 'map' && (
-//         <MapContainer
-//           center={[21.216200, 76.874300]}
-//           zoom={16}
-//           style={{ height: '700px', width: '100%',padding:'100px' }}
-//           className='fixed z-0 top-56 inset-0 flex p-5 justify-center items-center'
-//         >
-//           <TileLayer
-//             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-//             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-//           />
-//           {/* Farm Markers */}
-//           {dummyData.map((farm) => (
-//             <Marker key={farm.id} position={farm.location}>
-//               <Popup>
-//                 <strong>{farm.farmName}</strong>
-//                 <br />
-//                 Crop Type: {farm.cropType}
-//                 <br />
-//                 Services: {farm.serviceTypes.join(', ')}
-//               </Popup>
-//             </Marker>
-//           ))}
-//           {/* Service Provider Markers */}
-//           {serviceProviders.map((provider) => (
-//             <Marker key={provider.id} position={provider.location}>
-//               <Popup>
-//                 <strong>{provider.name}</strong>
-//                 <br />
-//                 Service: {provider.serviceType}
-//               </Popup>
-//             </Marker>
-//           ))}
-//         </MapContainer>
-//       )}
-
-//       {/* Modal */}
-//       {isModalOpen && <FarmerServiceRegistrationForm onClose={() => setIsModalOpen(false)} />}
-//     </div>
-//   );
-// };
-
-// export default FarmerDashboard;
-
-
-// import React, { useState } from 'react';
+// import React, { useState, useEffect } from 'react';
 // import FarmerServiceRegistrationForm from './FarmerServiceRegistrationForm';
 // import ServiceTable from './ServiceTable';
 // import ServiceMap from './ServiceMap';
 // import FilterControls from './FilterControls';
+// import HistoryTable from './HistoryTable';
 
 // const FarmerDashboard = () => {
 //   const [isModalOpen, setIsModalOpen] = useState(false);
+//   const [isEditMode, setIsEditMode] = useState(false); // Track edit mode
+//   const [editData, setEditData] = useState(null); // Store data of the request being edited
 //   const [filter, setFilter] = useState({ cropType: '', serviceType: '' });
-//   const [view, setView] = useState('table'); // 'table' or 'map'
+//   const [view, setView] = useState('table'); // 'table', 'map', or 'history'
+//   const [historyData, setHistoryData] = useState([]); // State for history data
+//   const [loading, setLoading] = useState(false); // Loading state for API call
+
+//   // Fetch history data from the backend
+//   useEffect(() => {
+//     if (view === 'history') {
+//       fetchHistoryData();
+//     }
+//   }, [view]);
+
+//   const fetchHistoryData = async () => {
+//     setLoading(true);
+//     try {
+//       const response = await fetch('https://nfbackend.onrender.com/api/service/ser_request');
+//       if (!response.ok) {
+//         throw new Error('Failed to fetch history data');
+//       }
+//       const data = await response.json();
+//       setHistoryData(data);
+//     } catch (error) {
+//       console.error('Error fetching history data:', error);
+//       alert('Failed to fetch history data. Please try again.');
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   // Handle Edit Action
+//   const handleEdit = (id) => {
+//     // Find the item to edit
+//     const itemToEdit = historyData.find((item) => item.id === id);
+//     if (itemToEdit) {
+//       setEditData(itemToEdit); // Set the data to be edited
+//       setIsEditMode(true); // Enable edit mode
+//       setIsModalOpen(true); // Open the modal
+//     }
+//   };
+
+//   // Handle Delete Action
+//   const handleDelete = async (id) => {
+//     const confirmDelete = window.confirm('Are you sure you want to delete this request?');
+//     if (confirmDelete) {
+//       try {
+//         const response = await fetch(`https://nfbackend.onrender.com/api/service/ser_request/${id}`, {
+//           method: 'DELETE',
+//         });
+//         if (!response.ok) {
+//           throw new Error('Failed to delete the request');
+//         }
+//         // Remove the deleted item from the history data
+//         setHistoryData((prevData) => prevData.filter((item) => item.id !== id));
+//         alert('Request deleted successfully');
+//       } catch (error) {
+//         console.error('Error deleting request:', error);
+//         alert('Failed to delete the request. Please try again.');
+//       }
+//     }
+//   };
+
+//   // Handle Form Submission (Create or Edit)
+//   const handleFormSubmit = async (formData) => {
+//     try {
+//       const url = isEditMode
+//         ? `https://nfbackend.onrender.com/api/service/ser_request/${editData.id}` // Edit endpoint
+//         : 'https://nfbackend.onrender.com/api/service/ser_request'; // Create endpoint
+//       const method = isEditMode ? 'PUT' : 'POST';
+
+//       const response = await fetch(url, {
+//         method,
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(formData),
+//       });
+
+//       if (!response.ok) {
+//         throw new Error(`Failed to ${isEditMode ? 'update' : 'submit'} the form`);
+//       }
+
+//       const result = await response.json();
+//       console.log('Form submitted successfully:', result);
+//       alert(result.message);
+
+//       // Refresh history data after submission
+//       fetchHistoryData();
+
+//       // Reset form and close modal
+//       setIsModalOpen(false);
+//       setIsEditMode(false);
+//       setEditData(null);
+//     } catch (error) {
+//       console.error('Error submitting the form:', error.message);
+//       alert(`Failed to ${isEditMode ? 'update' : 'submit'} the form. Please try again.`);
+//     }
+//   };
 
 //   const dummyData = [
 //     {
@@ -745,7 +314,7 @@
 //             </button>
 //             <button
 //               onClick={() => setView('map')}
-//               className={`px-4 py-2 rounded-md ${
+//               className={`px-4 py-2 rounded-md mr-2 ${
 //                 view === 'map'
 //                   ? 'bg-green-600 text-white'
 //                   : 'bg-gray-300 text-gray-700'
@@ -753,9 +322,22 @@
 //             >
 //               Map View
 //             </button>
+//             <button
+//               onClick={() => setView('history')}
+//               className={`px-4 py-2 rounded-md ${
+//                 view === 'history'
+//                   ? 'bg-green-600 text-white'
+//                   : 'bg-gray-300 text-gray-700'
+//               }`}
+//             >
+//               History
+//             </button>
 //           </div>
 //           <button
-//             onClick={() => setIsModalOpen(true)}
+//             onClick={() => {
+//               setIsEditMode(false); // Disable edit mode
+//               setIsModalOpen(true); // Open the modal
+//             }}
 //             className="px-4 py-2 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 focus:outline-none mb-4"
 //           >
 //             Raise Request
@@ -769,8 +351,33 @@
 //       {/* Map View */}
 //       {view === 'map' && <ServiceMap farms={dummyData} serviceProviders={serviceProviders} />}
 
+//       {/* History View */}
+//       {view === 'history' && (
+//         <div>
+//           {loading ? (
+//             <p>Loading history data...</p>
+//           ) : (
+//             <HistoryTable
+//               data={historyData}
+//               onEdit={handleEdit}
+//               onDelete={handleDelete}
+//             />
+//           )}
+//         </div>
+//       )}
+
 //       {/* Modal */}
-//       {isModalOpen && <FarmerServiceRegistrationForm onClose={() => setIsModalOpen(false)} />}
+//       {isModalOpen && (
+//         <FarmerServiceRegistrationForm
+//           onClose={() => {
+//             setIsModalOpen(false);
+//             setIsEditMode(false);
+//             setEditData(null);
+//           }}
+//           onSubmit={handleFormSubmit}
+//           initialData={editData} // Pass existing data for editing
+//         />
+//       )}
 //     </div>
 //   );
 // };
@@ -778,26 +385,428 @@
 // export default FarmerDashboard;
 
 
+// import React, { useState, useEffect } from 'react';
+// import FarmerServiceRegistrationForm from './FarmerServiceRegistrationForm';
+// import ServiceTable from './ServiceTable';
+// import ServiceMap from './ServiceMap';
+// import FilterControls from './FilterControls';
+// import HistoryTable from './HistoryTable';
+// import FarmerServiceEnquiryForm from './FarmerServiceEnquiryForm'; // Import the enquiry form component
+
+// const FarmerDashboard = () => {
+//   const [isModalOpen, setIsModalOpen] = useState(false);
+//   const [isEnquiryModalOpen, setIsEnquiryModalOpen] = useState(false); // State for enquiry modal
+//   const [isEditMode, setIsEditMode] = useState(false);
+//   const [editData, setEditData] = useState(null);
+//   const [filter, setFilter] = useState({ cropType: '', serviceType: '' });
+//   const [view, setView] = useState('table');
+//   const [historyData, setHistoryData] = useState([]);
+//   const [loading, setLoading] = useState(false);
+
+//   useEffect(() => {
+//     if (view === 'history') {
+//       fetchHistoryData();
+//     }
+//   }, [view]);
+
+//   const fetchHistoryData = async () => {
+//     setLoading(true);
+//     try {
+//       const response = await fetch('https://nfbackend.onrender.com/api/service/ser_request');
+//       if (!response.ok) {
+//         throw new Error('Failed to fetch history data');
+//       }
+//       const data = await response.json();
+//       setHistoryData(data);
+//     } catch (error) {
+//       console.error('Error fetching history data:', error);
+//       alert('Failed to fetch history data. Please try again.');
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   const handleEdit = (id) => {
+//     const itemToEdit = historyData.find((item) => item.id === id);
+//     if (itemToEdit) {
+//       setEditData(itemToEdit);
+//       setIsEditMode(true);
+//       setIsModalOpen(true);
+//     }
+//   };
+
+//   const handleDelete = async (id) => {
+//     const confirmDelete = window.confirm('Are you sure you want to delete this request?');
+//     if (confirmDelete) {
+//       try {
+//         const response = await fetch(`https://nfbackend.onrender.com/api/service/ser_request/${id}`, {
+//           method: 'DELETE',
+//         });
+//         if (!response.ok) {
+//           throw new Error('Failed to delete the request');
+//         }
+//         setHistoryData((prevData) => prevData.filter((item) => item.id !== id));
+//         alert('Request deleted successfully');
+//       } catch (error) {
+//         console.error('Error deleting request:', error);
+//         alert('Failed to delete the request. Please try again.');
+//       }
+//     }
+//   };
+
+//   const handleFormSubmit = async (formData) => {
+//     try {
+//       const url = isEditMode
+//         ? `https://nfbackend.onrender.com/api/service/ser_request/${editData.id}`
+//         : 'https://nfbackend.onrender.com/api/service/ser_request';
+//       const method = isEditMode ? 'PUT' : 'POST';
+
+//       const response = await fetch(url, {
+//         method,
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(formData),
+//       });
+
+//       if (!response.ok) {
+//         throw new Error(`Failed to ${isEditMode ? 'update' : 'submit'} the form`);
+//       }
+
+//       const result = await response.json();
+//       console.log('Form submitted successfully:', result);
+//       alert(result.message);
+
+//       fetchHistoryData();
+//       setIsModalOpen(false);
+//       setIsEditMode(false);
+//       setEditData(null);
+//     } catch (error) {
+//       console.error('Error submitting the form:', error.message);
+//       alert(`Failed to ${isEditMode ? 'update' : 'submit'} the form. Please try again.`);
+//     }
+//   };
+
+//   const dummyData = [
+//     {
+//       id: 1,
+//       name: 'Sai Kumar',
+//       farmName: 'Green Acres',
+//       email: 'sai@example.com',
+//       phone: '9321567890',
+//       cropType: 'Wheat',
+//       farmArea: '50',
+//       address: '123 Farm Lane',
+//       serviceTypes: [
+//         'Soil Testing',
+//         'Drone Service',
+//         'Irrigation Services',
+
+//       ],
+//       location: [21.215000, 76.880000], // Latitude and Longitude
+//     },
+   
+//     {
+//       id: 5,
+//       name: 'Neha Rao',
+//       farmName: 'Golden Fields',
+//       email: 'neha@example.com',
+//       phone: '9345678910',
+//       cropType: 'Maize',
+//       farmArea: '100',
+//       address: '123 Golden Valley',
+//       serviceTypes: [
+//         'Soil Testing',
+//         'Drone Service',
+//         'Market Access & Sales Support',
+//         'Precision Agriculture',
+//         'Climate and Weather Advisory',
+//         'Post-Harvest Processing'
+//       ],
+//       location: [21.213700, 76.879376],
+//     },
+//     {
+//       id: 6,
+//       name: 'Harish Kumar',
+//       farmName: 'Mountain View Farms',
+//       email: 'harish@example.com',
+//       phone: '9988775432',
+//       cropType: 'Barley',
+//       farmArea: '60',
+//       address: '258 Mountain Road',
+//       serviceTypes: [
+//         'Soil Testing',
+//         'Drone Service',
+//         'Irrigation Services',
+//         'Pest and Disease Monitoring',
+//       ],
+//       location: [21.214200, 76.877500],
+//     },
+//     {
+//       id: 7,
+//       name: 'Meera Iyer',
+//       farmName: 'Blue Sky Farms',
+//       email: 'meera@example.com',
+//       phone: '9876549870',
+//       cropType: 'Sugarcane',
+//       farmArea: '150',
+//       address: '567 Sugarcane Road',
+//       serviceTypes: [
+//         'Soil Testing',
+//         'Drone Service',
+//         'Irrigation Services',
+//         'Precision Agriculture',
+//         'Post-Harvest Processing'
+//       ],
+//       location: [21.210500, 76.879800],
+//     },
+//     {
+//       id: 8,
+//       name: 'Vikram Singh',
+//       farmName: 'Eastwood Gardens',
+//       email: 'vikram@example.com',
+//       phone: '9321561234',
+//       cropType: 'Grapes',
+//       farmArea: '45',
+//       address: '678 Vineyard Street',
+//       serviceTypes: [
+
+//         'Climate and Weather Advisory',
+//         'Post-Harvest Processing'
+//       ],
+//       location: [21.211800, 76.876500],
+//     },
+//     {
+//       id: 9,
+//       name: 'Priya Gupta',
+//       farmName: 'Lush Meadows',
+//       email: 'priya@example.com',
+//       phone: '9988771122',
+//       cropType: 'Peppers',
+//       farmArea: '80',
+//       address: '101 Lush Meadows Lane',
+//       serviceTypes: [
+//         'Soil Testing',
+//         'Irrigation Services',
+//         'Pest and Disease Monitoring',
+//         'Fertilization Services',
+
+//       ],
+//       location: [21.213300, 76.874600],
+//     },
+//     {
+//       id: 10,
+//       name: 'Rahul Desai',
+//       farmName: 'Golden Harvests',
+//       email: 'rahul@example.com',
+//       phone: '9345671234',
+//       cropType: 'Cotton',
+//       farmArea: '110',
+//       address: '89 Cotton Road',
+//       serviceTypes: [
+//         'Harvest Storage & Handling',
+//         'Market Access & Sales Support',
+//         'Precision Agriculture',
+//         'Post-Harvest Processing'
+//       ],
+//       location: [21.210000, 76.875200],
+//     },
+   
+//     {
+//       id: 12,
+//       name: 'Rajesh',
+//       farmName: 'Golden Fields',
+//       email: 'rajesh@example.com',
+//       phone: '9876543210',
+//       cropType: 'Corn',
+//       farmArea: '100',
+//       address: '456 Harvest Road',
+//       serviceTypes: ['Irrigation Services', 'Pest and Disease Monitoring'],
+//       location: [21.214500, 76.873000], // Latitude and Longitude
+//     },
+//     {
+//       id: 13,
+//       name: 'Ganesh',
+//       farmName: 'Sunrise Farms',
+//       email: 'ganesh@example.com',
+//       phone: '8347155565',
+//       cropType: 'Rice',
+//       farmArea: '75',
+//       address: '789 Rice Field',
+//       serviceTypes: ['Crop Health Monitoring', 'Weed Control'],
+//       location: [21.215500, 76.881200], // Latitude and Longitude
+//     },
+//   ];
+
+//   const serviceProviders = [
+//     {
+//       id: 1,
+//       name: 'AgriTech Solutions',
+//       serviceType: 'Soil Testing',
+//       location: [21.217000, 76.882000], // Latitude and Longitude
+//     },
+//     {
+//       id: 2,
+//       name: 'Drone Masters',
+//       serviceType: 'Drone Service',
+//       location: [21.218500, 76.877800], // Latitude and Longitude
+//     },
+//     {
+//       id: 3,
+//       name: 'Irrigation Pros',
+//       serviceType: 'Irrigation Services',
+//       location: [21.216200, 76.874300], // Latitude and Longitude
+//     },
+//   ];
+
+
+//   const filteredData = dummyData.filter(
+//     (item) =>
+//       (!filter.cropType || item.cropType === filter.cropType) &&
+//       (!filter.serviceType ||
+//         item.serviceTypes.some((service) => service === filter.serviceType))
+//   );
+
+//   const handleFilterChange = (e) => {
+//     const { name, value } = e.target;
+//     setFilter((prev) => ({ ...prev, [name]: value }));
+//   };
+
+//   return (
+//     <div className="p-6 bg-[#eaece4] min-h-screen">
+//       {/* Header */}
+//       <h1 className="text-4xl font-extrabold mb-6 text-center text-green-700">Service Request</h1>
+
+//       {/* View Toggle Buttons */}
+//       <div className='flex justify-between items-center mb-4'>
+//         {/* Filters */}
+//         <FilterControls filter={filter} handleFilterChange={handleFilterChange} />
+//         <div className='flex space-x-5'>
+//           <div className="mb-4">
+//             <button
+//               onClick={() => setView('table')}
+//               className={`px-4 py-2 rounded-md mr-2 ${
+//                 view === 'table'
+//                   ? 'bg-green-600 text-white'
+//                   : 'bg-gray-300 text-gray-700'
+//               }`}
+//             >
+//               Table View
+//             </button>
+//             <button
+//               onClick={() => setView('map')}
+//               className={`px-4 py-2 rounded-md mr-2 ${
+//                 view === 'map'
+//                   ? 'bg-green-600 text-white'
+//                   : 'bg-gray-300 text-gray-700'
+//               }`}
+//             >
+//               Map View
+//             </button>
+//             <button
+//               onClick={() => setView('history')}
+//               className={`px-4 py-2 rounded-md ${
+//                 view === 'history'
+//                   ? 'bg-green-600 text-white'
+//                   : 'bg-gray-300 text-gray-700'
+//               }`}
+//             >
+//               History
+//             </button>
+//           </div>
+//           <div className="flex space-x-2">
+//             <button
+//               onClick={() => {
+//                 setIsEditMode(false);
+//                 setIsModalOpen(true);
+//               }}
+//               className="px-4 py-2 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 focus:outline-none mb-4"
+//             >
+//               Raise Request
+//             </button>
+//             <button
+//               onClick={() => setIsEnquiryModalOpen(true)}
+//               className="px-4 py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none mb-4"
+//             >
+//               Enquiry
+//             </button>
+//           </div>
+//         </div>
+//       </div>
+
+//       {/* Table View */}
+//       {view === 'table' && <ServiceTable data={filteredData} />}
+
+//       {/* Map View */}
+//       {view === 'map' && <ServiceMap farms={dummyData} serviceProviders={serviceProviders} />}
+
+//       {/* History View */}
+//       {view === 'history' && (
+//         <div>
+//           {loading ? (
+//             <p>Loading history data...</p>
+//           ) : (
+//             <HistoryTable
+//               data={historyData}
+//               onEdit={handleEdit}
+//               onDelete={handleDelete}
+//             />
+//           )}
+//         </div>
+//       )}
+
+//       {/* Service Request Modal */}
+//       {view === 'history' && isModalOpen && (
+//         <FarmerServiceRegistrationForm
+//           onClose={() => {
+//             setIsModalOpen(false);
+//             setIsEditMode(false);
+//             setEditData(null);
+//           }}
+//           onSubmit={handleFormSubmit}
+//           initialData={editData}
+//         />
+//       )}
+
+//       {/* Enquiry Modal */}
+//       {isEnquiryModalOpen && (
+//         <FarmerServiceEnquiryForm
+//           onClose={() => setIsEnquiryModalOpen(false)}
+//           onSubmit={(enquiryData) => {
+//             // Handle enquiry form submission
+//             console.log('Enquiry submitted:', enquiryData);
+//             alert('Enquiry submitted successfully!');
+//             setIsEnquiryModalOpen(false);
+//           }}
+//         />
+//       )}
+//     </div>
+//   );
+// };
+
+// export default FarmerDashboard;
 import React, { useState, useEffect } from 'react';
 import FarmerServiceRegistrationForm from './FarmerServiceRegistrationForm';
 import ServiceTable from './ServiceTable';
 import ServiceMap from './ServiceMap';
 import FilterControls from './FilterControls';
 import HistoryTable from './HistoryTable';
+import FarmerServiceEnquiryForm from './FarmerServiceEnquiryForm';
 
 const FarmerDashboard = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [editData, setEditData] = useState(null);
   const [filter, setFilter] = useState({ cropType: '', serviceType: '' });
-  const [view, setView] = useState('table'); // 'table', 'map', or 'history'
-  const [historyData, setHistoryData] = useState([]); // State for history data
-  const [loading, setLoading] = useState(false); // Loading state for API call
+  const [activeTab, setActiveTab] = useState('table');
+  const [historyData, setHistoryData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  // Fetch history data from the backend
   useEffect(() => {
-    if (view === 'history') {
+    if (activeTab === 'history') {
       fetchHistoryData();
     }
-  }, [view]);
+  }, [activeTab]);
 
   const fetchHistoryData = async () => {
     setLoading(true);
@@ -813,6 +822,67 @@ const FarmerDashboard = () => {
       alert('Failed to fetch history data. Please try again.');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleEdit = (id) => {
+    const itemToEdit = historyData.find((item) => item.id === id);
+    if (itemToEdit) {
+      setEditData(itemToEdit);
+      setIsEditMode(true);
+      setIsModalOpen(true);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm('Are you sure you want to delete this request?');
+    if (confirmDelete) {
+      try {
+        const response = await fetch(`https://nfbackend.onrender.com/api/service/ser_request/${id}`, {
+          method: 'DELETE',
+        });
+        if (!response.ok) {
+          throw new Error('Failed to delete the request');
+        }
+        setHistoryData((prevData) => prevData.filter((item) => item.id !== id));
+        alert('Request deleted successfully');
+      } catch (error) {
+        console.error('Error deleting request:', error);
+        alert('Failed to delete the request. Please try again.');
+      }
+    }
+  };
+
+  const handleFormSubmit = async (formData) => {
+    try {
+      const url = isEditMode
+        ? `https://nfbackend.onrender.com/api/service/ser_request/${editData.id}`
+        : 'https://nfbackend.onrender.com/api/service/ser_request';
+      const method = isEditMode ? 'PUT' : 'POST';
+
+      const response = await fetch(url, {
+        method,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to ${isEditMode ? 'update' : 'submit'} the form`);
+      }
+
+      const result = await response.json();
+      console.log('Form submitted successfully:', result);
+      alert(result.message);
+
+      fetchHistoryData();
+      setIsModalOpen(false);
+      setIsEditMode(false);
+      setEditData(null);
+    } catch (error) {
+      console.error('Error submitting the form:', error.message);
+      alert(`Failed to ${isEditMode ? 'update' : 'submit'} the form. Please try again.`);
     }
   };
 
@@ -987,7 +1057,7 @@ const FarmerDashboard = () => {
       location: [21.216200, 76.874300], // Latitude and Longitude
     },
   ];
-
+  
   const filteredData = dummyData.filter(
     (item) =>
       (!filter.cropType || item.cropType === filter.cropType) &&
@@ -1002,74 +1072,115 @@ const FarmerDashboard = () => {
 
   return (
     <div className="p-6 bg-[#eaece4] min-h-screen">
-      {/* Header */}
-      <h1 className="text-4xl font-extrabold mb-6 text-center text-green-700">Service Request</h1>
+    {activeTab === 'table' && <h1 className="text-4xl font-extrabold mb-6 text-center text-green-700">Service Providers</h1>}
+    {activeTab === 'map' && <h1 className="text-4xl font-extrabold mb-6 text-center text-green-700">Service Map</h1>}
+    {activeTab === 'history' && <h1 className="text-4xl font-extrabold mb-6 text-center text-green-700">Request History</h1>}
+    {activeTab === 'quotation' && <h1 className="text-4xl font-extrabold mb-6 text-center text-green-700">Service Quotation</h1>}
 
-      {/* View Toggle Buttons */}
-      <div className='flex justify-between items-center mb-4'>
-        {/* Filters */}
-        <FilterControls filter={filter} handleFilterChange={handleFilterChange} />
-        <div className='flex space-x-5'>
-          <div className="mb-4">
-            <button
-              onClick={() => setView('table')}
-              className={`px-4 py-2 rounded-md mr-2 ${
-                view === 'table'
-                  ? 'bg-green-600 text-white'
-                  : 'bg-gray-300 text-gray-700'
-              }`}
-            >
-              Table View
-            </button>
-            <button
-              onClick={() => setView('map')}
-              className={`px-4 py-2 rounded-md mr-2 ${
-                view === 'map'
-                  ? 'bg-green-600 text-white'
-                  : 'bg-gray-300 text-gray-700'
-              }`}
-            >
-              Map View
-            </button>
-            <button
-              onClick={() => setView('history')}
-              className={`px-4 py-2 rounded-md ${
-                view === 'history'
-                  ? 'bg-green-600 text-white'
-                  : 'bg-gray-300 text-gray-700'
-              }`}
-            >
-              History
-            </button>
-          </div>
+    <div className="flex justify-between items-center">
+      {/* Filter Controls - Only shown on table view */}
+      <div className="flex-1">
+        {activeTab === 'table' && <FilterControls filter={filter} handleFilterChange={handleFilterChange} />}
+      </div>
+      
+      {/* Raise Request Button - Always aligned right */}
+      <div className="flex justify-end">
+        <button
+          onClick={() => {
+            setIsEditMode(false);
+            setIsModalOpen(true);
+          }}
+          className="px-4 py-2 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 focus:outline-none"
+        >
+          Raise Request
+        </button>
+      </div>
+    </div>
+      {/* Tabs */}
+      <div className="border-b border-gray-200 mb-4">
+        <nav className="-mb-px flex space-x-8">
           <button
-            onClick={() => setIsModalOpen(true)}
-            className="px-4 py-2 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 focus:outline-none mb-4"
+            onClick={() => setActiveTab('table')}
+            className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
+              activeTab === 'table'
+                ? 'border-green-500 text-green-600'
+                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+            }`}
           >
-            Raise Request
+            Table View
           </button>
-        </div>
+          <button
+            onClick={() => setActiveTab('map')}
+            className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
+              activeTab === 'map'
+                ? 'border-green-500 text-green-600'
+                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+            }`}
+          >
+            Map View
+          </button>
+          <button
+            onClick={() => setActiveTab('history')}
+            className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
+              activeTab === 'history'
+                ? 'border-green-500 text-green-600'
+                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+            }`}
+          >
+            History
+          </button>
+          <button
+            onClick={() => setActiveTab('quotation')}
+            className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
+              activeTab === 'quotation'
+                ? 'border-green-500 text-green-600'
+                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+            }`}
+          >
+            Quotation
+          </button>
+        </nav>
       </div>
 
-      {/* Table View */}
-      {view === 'table' && <ServiceTable data={filteredData} />}
+      {/* Tab Content */}
+      <div className="bg-white rounded-lg shadow p-4">
+        {activeTab === 'table' && <ServiceTable data={filteredData} />}
+        {activeTab === 'map' && <ServiceMap farms={dummyData} serviceProviders={serviceProviders} />}
+        {activeTab === 'history' && (
+          <div>
+            {loading ? (
+              <p>Loading history data...</p>
+            ) : (
+              <HistoryTable
+                data={historyData}
+                onEdit={handleEdit}
+                onDelete={handleDelete}
+              />
+            )}
+          </div>
+        )}
+        {activeTab === 'quotation' && (
+          <FarmerServiceEnquiryForm
+            onSubmit={(enquiryData) => {
+              console.log('Enquiry submitted:', enquiryData);
+              alert('Enquiry submitted successfully!');
+            }}
+          />
+        )}
+      </div>
 
-      {/* Map View */}
-      {view === 'map' && <ServiceMap farms={dummyData} serviceProviders={serviceProviders} />}
-
-      {/* History View */}
-      {view === 'history' && (
-        <div>
-          {loading ? (
-            <p>Loading history data...</p>
-          ) : (
-            <HistoryTable data={historyData} />
-          )}
-        </div>
+      {/* Service Request Modal */}
+      {isModalOpen && (
+        <FarmerServiceRegistrationForm
+          onClose={() => {
+            setIsModalOpen(false);
+            setIsEditMode(false);
+            setEditData(null);
+          }}
+          onSubmit={handleFormSubmit}
+          initialData={editData}
+        />
       )}
-
-      {/* Modal */}
-      {isModalOpen && <FarmerServiceRegistrationForm onClose={() => setIsModalOpen(false)} />}
     </div>
   );
 };

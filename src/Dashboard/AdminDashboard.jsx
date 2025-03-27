@@ -1,7 +1,6 @@
 import React from 'react'
 import { Routes,Route } from 'react-router-dom'
 import Layout from '../components/Layout'
-import Home from '../Adminpages/Home'
 import ServiceProviderDashboard from '../Adminpages/ServiceProviderDashboard'
 import FarmEquipmentManager from '../Adminpages/FarmEquipmentManager'
 import ServiceReport from '../Adminpages/ServiceReport'
@@ -13,7 +12,6 @@ function AdminDashboard() {
     <Routes>
       <Route path='/' element={<Layout/>}>
         <Route index element={<ServiceProviderDashboard/>}/>
-        
         <Route path='ServicesManagement' element= {<ServicesManagement/>} />
         <Route path = 'ServiceReport' element={<ServiceReport />} />
         <Route path='FarmEquipmentManager' element= {<FarmEquipmentManager/>} />

@@ -198,3 +198,86 @@ const FarmerServiceRegistrationForm = ({ onClose }) => {
 };
 
 export default FarmerServiceRegistrationForm;
+
+// import React, { useState, useEffect } from 'react';
+
+// const FarmerServiceRegistrationForm = ({ onClose, onSubmit, initialData }) => {
+//   const [formData, setFormData] = useState({
+//     name: '',
+//     farmName: '',
+//     email: '',
+//     phone: '',
+//     cropType: '',
+//     farmArea: '',
+//     address: '',
+//     serviceTypes: [],
+//   });
+
+//   // Pre-fill the form if initialData is provided
+//   useEffect(() => {
+//     if (initialData) {
+//       setFormData(initialData);
+//     }
+//   }, [initialData]);
+
+//   const handleServiceChange = (event) => {
+//     const { value } = event.target;
+//     setFormData((prevData) => {
+//       const newServices = prevData.serviceTypes.includes(value)
+//         ? prevData.serviceTypes.filter((service) => service !== value)
+//         : [...prevData.serviceTypes, value];
+//       return { ...prevData, serviceTypes: newServices };
+//     });
+//   };
+
+//   const handleInputChange = (event) => {
+//     const { name, value } = event.target;
+//     setFormData((prevData) => ({ ...prevData, [name]: value }));
+//   };
+
+//   const handleSubmit = async (event) => {
+//     event.preventDefault();
+//     onSubmit(formData); // Call the onSubmit function passed from the parent
+//   };
+
+//   return (
+//     <div className="fixed z-40 inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
+//       <div className="bg-white p-6 rounded-lg shadow-lg w-[50%] overflow-y-scroll max-h-[95vh]">
+//         <h2 className="text-xl font-bold mb-4">
+//           {initialData ? 'Edit Request' : 'Raise Request'}
+//         </h2>
+//         <form onSubmit={handleSubmit}>
+//           {/* Form fields (same as before) */}
+//           <div className="mb-4">
+//             <label className="block text-sm font-medium text-gray-700">Name</label>
+//             <input
+//               type="text"
+//               name="name"
+//               value={formData.name}
+//               onChange={handleInputChange}
+//               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+//             />
+//           </div>
+//           {/* Add other fields similarly */}
+//           <div className="flex justify-end space-x-2">
+//             <button
+//               type="button"
+//               onClick={onClose}
+//               className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 focus:outline-none"
+//             >
+//               Cancel
+//             </button>
+//             <button
+//               type="submit"
+//               className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none"
+//             >
+//               {initialData ? 'Update' : 'Submit'}
+//             </button>
+//           </div>
+//         </form>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default FarmerServiceRegistrationForm;

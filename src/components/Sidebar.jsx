@@ -4,13 +4,12 @@ import { LuLogOut } from 'react-icons/lu';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../assets/images/nf-logo.jpg';
 import { FaHome } from 'react-icons/fa';
-import { GiPlantRoots, GiWateringCan } from 'react-icons/gi'; 
-import { WiDaySunny } from 'react-icons/wi';
+import { GiPlantRoots, GiWateringCan } from 'react-icons/gi';
 import { AiOutlineBarChart } from 'react-icons/ai';
 import { GiFarmTractor } from 'react-icons/gi';
 import { MdTerrain } from 'react-icons/md';
-import { FaUsers, FaLeaf, FaMapMarkedAlt } from "react-icons/fa";
-import { MdAssessment, MdNotifications } from "react-icons/md";
+import { FaUsers,FaMapMarkedAlt } from "react-icons/fa";
+import { MdAssessment } from "react-icons/md";
 import { AiOutlineForm } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 
@@ -27,7 +26,7 @@ function Sidebar() {
 
   const ADMIN_SIDEBAR_LINKS = [
    
-    { id: 1, path: '/admin/ServiceProviderDashboard', name: 'Dashboard', icon: FaHome },
+    { id: 1, path: '/admin', name: 'Dashboard', icon: FaHome },
     { id: 2, path: '/admin/ServicesManagement', name: 'Services', icon: GiWateringCan },
     { id: 3, path: '/admin/ServiceReport', name: 'Analytics', icon: MdAssessment },
     { id: 4, path: '/admin/FarmEquipmentManager', name: 'Equipment Management', icon: FaMapMarkedAlt },

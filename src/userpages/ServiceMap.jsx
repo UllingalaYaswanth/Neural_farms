@@ -21,7 +21,7 @@ const ServiceMap = ({ farms, serviceProviders }) => {
       center={[21.216200, 76.874300]}
       zoom={16}
       style={{ height: '700px', width: '100%', padding: '100px' }}
-      className='fixed z-0 top-56 inset-0 flex p-5 justify-center items-center'
+      className='top-84 inset-0 flex p-5 justify-center items-center'
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
