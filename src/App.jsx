@@ -5,6 +5,7 @@ import AdminDashboard from './Dashboard/AdminDashboard';
 import UserDashboard from './Dashboard/UserDashboard';
 import RegisterPage from './userpages/Register';
 import MainDashboard from './Dashboard/MainDashboard';
+import LiveStock from './Dashboard/LiveStock';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/admin/*" element={<AdminDashboard />} />
         <Route path="/user/*" element={<UserDashboard />} />
         <Route path="/main/*" element={<MainDashboard />} />
+        <Route path="/livestock/*" element={<LiveStock />} />
         <Route path="/" element={<SignInPage />} />
       </Routes>
     </Router>

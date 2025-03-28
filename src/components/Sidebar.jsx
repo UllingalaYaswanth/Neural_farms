@@ -12,7 +12,8 @@ import { FaUsers,FaMapMarkedAlt } from "react-icons/fa";
 import { MdAssessment } from "react-icons/md";
 import { AiOutlineForm } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
-
+import { FaSeedling, FaHeartbeat, FaTint, FaBabyCarriage, FaCog } from 'react-icons/fa';
+import { GiGoat } from "react-icons/gi";
 function Sidebar() {
   const [userRole, setUserRole] = useState('');
   const location = useLocation();  // Get the current location
@@ -53,9 +54,20 @@ function Sidebar() {
     
   ];
 
+  const LIVESTOCK_LINKS = [
+    { id: 1, path: '/livestock', name: 'Dashboard', icon: FaHome }, // Link to main LiveStock dashboard
+    { id: 2, path: '/livestock/goats', name: 'Goats', icon: GiGoat }, // Link to Goats section
+    { id: 3, path: '/livestock/feeding', name: 'Feeding', icon: FaSeedling }, // Link to Feeding section
+    { id: 4, path: '/livestock/health', name: 'Health', icon: FaHeartbeat }, // Link to Health section
+    { id: 5, path: '/livestock/water', name: 'Water', icon: FaTint }, // Link to Water section
+    { id: 6, path: '/livestock/breeding', name: 'Breeding', icon: FaBabyCarriage }, // Link to Breeding section
+    { id: 7, path: '/livestock/settings', name: 'Settings', icon: FaCog },
+  ]
+
   const SIDEBAR_LINKS = 
   userRole === 'admin' ? ADMIN_SIDEBAR_LINKS : 
   userRole === 'main' ? MAIN_SIDEBAR_LINKS : 
+  userRole === 'livestock' ? LIVESTOCK_LINKS : 
   USER_SIDEBAR_LINKS;
 
 
