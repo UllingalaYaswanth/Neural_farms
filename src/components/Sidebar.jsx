@@ -26,7 +26,6 @@ function Sidebar() {
   }, []);
 
   const ADMIN_SIDEBAR_LINKS = [
-   
     { id: 1, path: '/admin', name: 'Dashboard', icon: FaHome },
     { id: 2, path: '/admin/ServicesManagement', name: 'Services', icon: GiWateringCan },
     { id: 3, path: '/admin/ServiceReport', name: 'Analytics', icon: MdAssessment },
