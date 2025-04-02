@@ -56,7 +56,7 @@ function Sidebar() {
 
   const LIVESTOCK_LINKS = [
     { id: 1, path: '/livestock', name: 'Dashboard', icon: FaHome }, // Link to main LiveStock dashboard
-    { id: 2, path: '/livestock/goats', name: 'Animals', icon: CiBoxList }, // Link to Goats section
+    { id: 2, path: '/livestock/animals', name: 'Animals', icon: CiBoxList }, // Link to Goats section
     { id: 3, path: '/livestock/feeding', name: 'Feeding', icon: FaSeedling }, // Link to Feeding section
     { id: 4, path: '/livestock/health', name: 'Health', icon: FaHeartbeat }, // Link to Health section
     { id: 5, path: '/livestock/water', name: 'Water', icon: FaTint }, // Link to Water section
