@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes,Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import Layout from '../components/Layout'
 import Home from '../userpages/Home'
 import CropMonitoring from '../userpages/CropMonitoring'
@@ -12,10 +12,11 @@ import FarmerServiceRegistrationForm from '../userpages/Service'
 import Cropseletion from '../userpages/Cropseletion'
 import LandRegistrationForm from '../userpages/LandRegistrartion'
 import PestDetectionDashboard from '../userpages/Pestcontrol'
+import FarmBoundary from '../userpages/FarmBoundary'
+import Weather from '../userpages/Weather'
 
 function UserDashboard() {
   return (
-
     <Routes>
       <Route path='/' element={<Layout/>}>
         <Route index element={<Home/>}/>
@@ -29,6 +30,8 @@ function UserDashboard() {
         <Route path='crop' element={<Cropseletion/>} />
         <Route path='land' element={<LandRegistrationForm/>} />
         <Route path='pest' element={<PestDetectionDashboard/>} />
+        <Route path='farmboundary' element={<FarmBoundary/>} />
+        <Route path='weather' element={<Weather />} />
       </Route>
     </Routes>
   )

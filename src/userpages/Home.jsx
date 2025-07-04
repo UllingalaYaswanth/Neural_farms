@@ -312,14 +312,24 @@
 
 
 
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Line, Bar } from "react-chartjs-2";
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, LineElement, PointElement, Title, Tooltip, Legend } from "chart.js";
 import { saveAs } from "file-saver";
 import { FaLeaf, FaSeedling, FaWater, FaBug } from "react-icons/fa"; 
 import { GiWateringCan, GiEarthAmerica } from "react-icons/gi"; 
-import { WiDaySunny } from "react-icons/wi";
+
 import FarmMap from "./FarmMap";
+import {
+  WiDaySunny,
+  WiCloudy,
+  WiRain,
+  WiThunderstorm,
+  WiSnow,
+  WiFog,
+  WiDayCloudy,
+} from "react-icons/wi";
+
 
 // Registering the chart elements
 ChartJS.register(
@@ -333,9 +343,23 @@ ChartJS.register(
   Legend
 );
 
+const getWeatherIcon = (condition) => {
+  const c = condition.toLowerCase();
+  if (c.includes("clear") || c.includes("sunny")) return <WiDaySunny className="text-5xl text-yellow-400" />;
+  if (c.includes("cloud")) return <WiCloudy className="text-5xl text-gray-400" />;
+  if (c.includes("rain")) return <WiRain className="text-5xl text-blue-500" />;
+  if (c.includes("thunder")) return <WiThunderstorm className="text-5xl text-purple-600" />;
+  if (c.includes("snow")) return <WiSnow className="text-5xl text-white" />;
+  if (c.includes("fog") || c.includes("mist") || c.includes("haze")) return <WiFog className="text-5xl text-gray-300" />;
+  return <WiDayCloudy className="text-5xl text-blue-300" />; // Default fallback
+};
+
+
 const Dashboard = () => {
   const [selectedFarm, setSelectedFarm] = useState(0); // Default to farm 0
-
+  const [weatherData, setWeatherData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const farmsData = [
     {
       name: "Green Valley Farm",
@@ -351,7 +375,7 @@ const Dashboard = () => {
       },
       color: '#4CAF50',
       cropHealthData: { health: "80%", condition: "Good" },
-      irrigationData: { status: "Active", nextWatering: "2024-12-02, 6:00 AM" },
+      irrigationData: { status: "Active", nextWatering: "2025-08-08, 6:00 AM" },
       pestData: { status: "None", lastChecked: "2024-12-20" },
       soilPhData: [6.5, 6.7, 6.8, 6.6, 6.9, 7.0],
       weatherData: { temperature: "22°C", rain: "10mm tomorrow", condition: "Sunny" },
@@ -467,6 +491,23 @@ const Dashboard = () => {
       },
     ],
   };
+
+useEffect(() => {
+  const fetchWeather = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/api/weather");
+      const data = await res.json();
+      setWeatherData(data);
+    } catch (err) {
+      console.error("Failed to fetch weather data:", err);
+      setError("Failed to fetch weather data.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchWeather();
+}, []);
 
   return (
     <div className="p-4 bg-[#eaece4]">
@@ -651,32 +692,49 @@ const Dashboard = () => {
         </div>
 
         {/* Weather Card */}
-        <div className="bg-white shadow-lg rounded-lg overflow-hidden hover:bg-green-600 text-gray-700 hover:text-white transition duration-300">
-          <div className="p-4 bg-green-700 text-white flex items-center space-x-2">
-            <WiDaySunny className="text-2xl" />
-            <h2 className="text-xl font-semibold">Weather & Climate</h2>
+<div className="bg-white shadow-lg rounded-lg overflow-hidden hover:bg-green-600 text-gray-700 hover:text-white transition duration-300">
+  <div className="p-4 bg-green-700 text-white flex items-center space-x-2">
+    <WiDaySunny className="text-2xl" />
+    <h2 className="text-xl font-semibold">Weather & Climate</h2>
+  </div>
+
+  <div className="p-4 min-h-[150px] flex flex-col justify-center">
+    {loading ? (
+      <div className="animate-pulse space-y-2">
+        <div className="h-6 bg-gray-300 rounded w-1/2"></div>
+        <div className="h-4 bg-gray-300 rounded w-1/3"></div>
+        <div className="h-4 bg-gray-300 rounded w-2/3 mt-2"></div>
+      </div>
+    ) : error ? (
+      <p className="text-red-600">{error}</p>
+    ) : weatherData.length > 0 ? (
+      <>
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <p className="text-3xl font-bold">{weatherData[0].maxtemp}</p>
+            <p className="text-sm">{weatherData[0].weatherCondition || "Condition Unknown"}</p>
           </div>
-          <div className="p-4">
-            <div className="flex items-center justify-between mb-4">
-              <div>
-                <p className="text-3xl font-bold">{selectedFarmData.weatherData.temperature}</p>
-                <p className="text-sm">{selectedFarmData.weatherData.condition}</p>
-              </div>
-              <WiDaySunny className="text-5xl text-yellow-500" />
-            </div>
-            <div className="space-y-2">
-              <p><span className="font-medium">Rain Forecast:</span> {selectedFarmData.weatherData.rain}</p>
-              <div className="mt-3">
-                <p className="font-medium">Recommendation:</p>
-                <p className="text-sm">
-                  {selectedFarmData.weatherData.rain.includes("rain") 
-                    ? "Delay irrigation scheduled for tomorrow" 
-                    : "Proceed with scheduled irrigation"}
-                </p>
-              </div>
-            </div>
+          {getWeatherIcon(weatherData[0].weatherCondition || "")}
+        </div>
+        <div className="space-y-2">
+          <p><span className="font-medium">Rain Forecast:</span> {weatherData[0].precipitation}</p>
+          <div className="mt-3">
+            <p className="font-medium">Recommendation:</p>
+            <p className="text-sm">
+              {(weatherData[0].precipitation?.toLowerCase().includes("rain") || parseFloat(weatherData[0].precipitation) > 0)
+                ? "Delay irrigation scheduled for tomorrow"
+                : "Proceed with scheduled irrigation"}
+            </p>
           </div>
         </div>
+      </>
+    ) : (
+      <p>No weather data available.</p>
+    )}
+  </div>
+</div>
+
+
       </div>
 
       {/* Data Visualizations */}
