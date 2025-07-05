@@ -11,7 +11,7 @@ function Weather() {
   useEffect(() => {
     const fetchWeather = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/weather'); // Adjust if hosted elsewhere
+        const res = await fetch('https://nfbackend.onrender.com/api/weather'); // Adjust if hosted elsewhere
         const data = await res.json();
         setWeatherData(data);
         setLoading(false);

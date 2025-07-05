@@ -207,7 +207,7 @@ const IrrigationControl = () => {
     setSubmitted(true);
     
     try {
-      const response = await fetch("http://localhost:5000/api/irrigation-requirements", {
+      const response = await fetch("https://nfbackend.onrender.com/api/irrigation-requirements", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

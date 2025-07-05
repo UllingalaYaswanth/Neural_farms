@@ -452,7 +452,7 @@
 //     const [liveStages, setLiveStages] = useState(null);
 
 // useEffect(() => {
-//   axios.get("http://localhost:5000/api/crop-stage")
+//   axios.get("https://nfbackend.onrender.com/api/crop-stage")
 //     .then((response) => {
 //       const data = response.data[0];
 //       const stageValues = [
@@ -776,7 +776,7 @@ const CropMonitoring = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await axios.get("http://localhost:5000/api/crop-stage", {
+      const response = await axios.get("https://nfbackend.onrender.com/api/crop-stage", {
         params: {
           timestamp: Date.now() // Prevent caching
         }

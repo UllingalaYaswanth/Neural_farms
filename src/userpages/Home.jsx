@@ -495,7 +495,7 @@ const Dashboard = () => {
 useEffect(() => {
   const fetchWeather = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/weather");
+      const res = await fetch("https://nfbackend.onrender.com/api/weather");
       const data = await res.json();
       setWeatherData(data);
     } catch (err) {
